@@ -28,9 +28,18 @@ npm run lint
 ```
 
 This will also fix whatever error / warning can be autofixed by ESLint.
-Currently we use the settings `plugin:vue/recommended`, for full list of rules [see here](https://eslint.vuejs.org/rules/).
+Currently, we use the settings `plugin:vue/recommended`, for full list of rules [see here](https://eslint.vuejs.org/rules/).
 
 General file-formatting rules are set up via [EditorConfig])(https://editorconfig.org/), see `.editorconfig` for details.
+
+### Testing
+
+Unit testing is set up using [Jest](https://jestjs.io/) as test runner and [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro).
+Test can be run with
+
+```shell
+npm run test
+```
 
 ### Architecture
 
