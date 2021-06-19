@@ -1,0 +1,31 @@
+/* This file should be included after Bootstrap (or any other third party CSS framework) */
+
+html,
+body {
+  width: 100%;
+  height: 100%; /* important for sticky footer to work */
+}
+
+body {
+  /* setup system font-stack (overwrite setting from Bootstrap) */
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  /* extra typo setting to make font-rendering nicer a bit
+     see: https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
+  */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--dark); /* color variable coming from Bootstrap */
+}
+
+/* Sticky footer solution
+   see: https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
+*/
+.sticky-footer-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.sticky-footer-content {
+  flex: 1;
+}
