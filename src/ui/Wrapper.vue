@@ -1,15 +1,12 @@
 <template>
-  <b-container
-    fluid="md"
-    class="h-100"
-  >
-    <b-row class="justify-content-center align-items-center h-100">
+  <b-container fluid="md">
+    <b-row class="justify-content-center align-items-center">
       <b-col
         cols="12"
         sm="10"
         md="8"
         lg="6"
-        xl="4"
+        xl="5"
       >
         <slot />
       </b-col>

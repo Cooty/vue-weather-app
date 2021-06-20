@@ -1,5 +1,5 @@
 <template>
-  <article class="border-top bg-light py-3">
+  <article class="bg-light py-3 shadow-lg">
     <wrapper>
       <b-form>
         <b-form-group

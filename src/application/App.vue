@@ -1,6 +1,6 @@
 <template>
   <main class="sticky-footer-container">
-    <section class="sticky-footer-content">
+    <section class="sticky-footer-content d-flex flex-column justify-content-center">
       <display />
     </section>
     <section class="sticky-footer-footer">
