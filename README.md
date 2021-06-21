@@ -5,6 +5,18 @@ A simple client for [OpenWeatherMap](https://openweathermap.org/) API.
 
 **For internal use only!**
 
+## Usage
+
+To run the app in development mode
+```shell
+npm run dev
+```
+
+to build it and start the dev-server in preview mode
+```shell
+npm run build && npm run serve
+```
+
 ## Project setup
 
 The project was scaffolded with [Vite's](https://vitejs.dev/) CLI, with the Vue.js template.
