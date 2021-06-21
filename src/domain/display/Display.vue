@@ -1,53 +1,79 @@
 <template>
-  <wrapper>
-    <b-card
-      tag="article"
-      class="shadow"
-    >
-      <text-row :bold="true">
-        The weather for Burgas (BG) is:
-      </text-row>
-      <div class="d-flex flex-nowrap justify-content-between">
-        <h1 class="h2">
-          24°C
-        </h1>
-        <div>
-          <b-badge variant="info">few clouds</b-badge>
-        </div>
+  <b-card
+    tag="article"
+    class="shadow"
+  >
+    <text-row :bold="true">
+      <template v-if="city && countryCode">
+        The weather for {{ city }} ({{ countryCode.toUpperCase() }}) is:
+      </template>
+      <template v-else>
+        The weather for a random coordinate (lat: {{ lat }}, lon: {{ lon }}) is:
+      </template>
+    </text-row>
+    <div class="d-flex flex-nowrap justify-content-between">
+      <h1 class="h2">
+        <formatted-temperature :temp="weatherData.temp" />
+      </h1>
+      <div>
+        <b-badge variant="info">
+          {{ weatherData.description }}
+        </b-badge>
       </div>
-      <text-row>
-        feels like 21°C
-      </text-row>
-      <divider />
-      <text-row :muted="true">
-        <b-icon-thermometer/> min 10°C / <b-icon-thermometer-half/> max 26°C
-      </text-row>
-      <text-row :muted="true">
-        Humidity: 69%
-      </text-row>
-      <text-row :muted="true">
-        Pressure: 1011hPa
-      </text-row>
-    </b-card>
-  </wrapper>
+    </div>
+    <text-row>
+      feels like <formatted-temperature :temp="weatherData.feelsLike" />
+    </text-row>
+    <divider />
+    <text-row :muted="true">
+      Humidity: {{ weatherData.humidity }}%
+    </text-row>
+    <text-row
+      :muted="true"
+      :no-bottom-margin="true"
+    >
+      Pressure: {{ weatherData.pressure }}hPa
+    </text-row>
+  </b-card>
 </template>
 
 <script>
-import Wrapper from '../../ui/Wrapper.vue'
-import {BCard, BBadge, BIconThermometer, BIconThermometerHalf} from 'bootstrap-vue'
-import TextRow from '../../ui/TextRow.vue';
-import Divider from '../../ui/Divider.vue';
+import TextRow from '../../ui/TextRow.vue'
+import Divider from '../../ui/Divider.vue'
+import FormattedTemperature from './FormattedTemperature.vue'
+import {BCard, BBadge} from 'bootstrap-vue'
+import WeatherData from '../../infrastructure/model/WeatherData'
 
 export default {
   name: 'Display',
   components: {
-    Wrapper,
     BCard,
     TextRow,
     Divider,
     BBadge,
-    BIconThermometer,
-    BIconThermometerHalf
+    FormattedTemperature
+  },
+  props: {
+    weatherData: {
+      type: WeatherData,
+      required: true
+    },
+    lat: {
+      type: Number,
+      default: 0
+    },
+    lon: {
+      type: Number,
+      default: 0
+    },
+    city: {
+      type: String,
+      default: ''
+    },
+    countryCode: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>

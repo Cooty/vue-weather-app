@@ -32,6 +32,10 @@ Currently, we use the settings `plugin:vue/recommended`, for full list of rules 
 
 General file-formatting rules are set up via [EditorConfig])(https://editorconfig.org/), see `.editorconfig` for details.
 
+#### File naming
+Files and folders should generally be named in `kebab-case`.
+Exceptions are `*.vue` files and `*.js` files that export a single class, in these cases use `PascalCase`.
+
 ### Testing
 
 Unit testing is set up using [Jest](https://jestjs.io/) as test runner and [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro).
@@ -39,6 +43,12 @@ Test can be run with
 
 ```shell
 npm run test
+```
+
+To generate coverage report, run
+
+```shell
+npm run coverage
 ```
 
 ### Architecture
@@ -50,3 +60,14 @@ The architecture mostly follows the convention for [Elegant Frontend Architectur
 - Framework: [Vue.js (V2)](https://vuejs.org/v2/guide/)
 - UI library: [Bootstrap Vue](https://bootstrap-vue.org/)
 - Build-tool and development environment: [Vite](https://vitejs.dev/)
+
+## TODOs and further ideas
+
+- Add more tests :)
+  Vite's use of `import.meta.env` doesn't seem to work with Jest ([see issue](https://github.com/facebook/jest/issues/9213))
+- Dockerize the application for both dev-environment and production
+- Implement i18n for both UI and API
+- Add dynamic icons to temperature (based on degrees and the description)
+- Add unit switcher, so the user can select between metric and imperial units, since the API supports this
+- Add an interactive map that displays both the City / Country or the initial random location
+- Add a combo-box instead of a plain select for the country selector, where the user can start typing the name of the country and the list will filter accordingly
