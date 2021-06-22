@@ -7,12 +7,17 @@ A simple client for [OpenWeatherMap](https://openweathermap.org/) API.
 
 ## Usage
 
+Install dependencies
+```shell
+npm install
+```
+
 To run the app in development mode
 ```shell
 npm run dev
 ```
 
-to build it and start the dev-server in preview mode
+To build it and start the dev-server in preview mode
 ```shell
 npm run build && npm run serve
 ```
