@@ -1,7 +1,8 @@
 import WeatherData from './model/WeatherData'
+import { MODE } from './environment'
 
 const store = {
-    debug: import.meta.env.MODE === 'development',
+    debug: MODE === 'development',
     state: {
         weatherData: new WeatherData(),
         city: '',

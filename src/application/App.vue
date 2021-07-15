@@ -14,6 +14,7 @@
         <template v-else-if="appState.isLoading">
           <div class="text-center">
             <b-spinner
+              title="Loading..."
               variant="primary"
               label="Loading"
             />
@@ -44,17 +45,17 @@ import {BSpinner, BAlert} from 'bootstrap-vue'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      appState: store.state
-    }
-  },
   components: {
     QueryForm,
     Display,
     BSpinner,
     BAlert,
     Wrapper
+  },
+  data() {
+    return {
+      appState: store.state
+    }
   }
 }
 </script>

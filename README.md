@@ -47,7 +47,7 @@ npm run lint
 This will also fix whatever error / warning can be autofixed by ESLint.
 Currently, we use the settings `plugin:vue/recommended`, for full list of rules [see here](https://eslint.vuejs.org/rules/).
 
-General file-formatting rules are set up via [EditorConfig])(https://editorconfig.org/), see `.editorconfig` for details.
+General file-formatting rules are set up via [EditorConfig](https://editorconfig.org/), see `.editorconfig` for details.
 
 #### File naming
 Files and folders should generally be named in `kebab-case`.

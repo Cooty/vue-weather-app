@@ -18,4 +18,12 @@ describe('A helper function to generate random geographical coordinates', () => 
         expect(isFloat(coords.lon)).toBeTruthy()
         expect(isFloat(coords.lat)).toBeTruthy()
     })
+
+    it('should have the proper format for the coordinates', () => {
+        const { lat, lon } = getRandomCoordinates();
+
+        // see: https://stackoverflow.com/questions/15965166/what-are-the-lengths-of-location-coordinates-latitude-and-longitude
+        expect(lat <= 90 && -90 <= lat).toBeTruthy()
+        expect(lon <= 180 && -180 <= lon).toBeTruthy()
+    })
 })

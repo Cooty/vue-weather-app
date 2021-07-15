@@ -74,6 +74,9 @@ export default {
       return this.query.city && this.query.country
     }
   },
+  mounted() {
+    this.mountHandler()
+  },
   methods: {
     errorHandler: (e) => {
       store.setIsError(true)
@@ -127,9 +130,6 @@ export default {
 
       store.setIsLoading(false)
     }
-  },
-  mounted() {
-    this.mountHandler()
   }
 }
 </script>
