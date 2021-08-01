@@ -1,4 +1,4 @@
-import { API_KEY } from '../../infrastructure/environment';
+import { API_KEY } from '../../infrastructure/environment'
 
 const key = API_KEY
 const preferredUnits = 'metric'
@@ -15,10 +15,10 @@ const getApiResponse = async (url) => {
     return await response.json()
 }
 
-export const getWeatherByCoordinates = async (lat, lon) => {
-    return await getApiResponse(`${weatherEndpoint}?lat=${lat}&lon=${lon}${settings}`)
+export const getWeatherByCoordinates = async (lat, lon, options) => {
+    return await getApiResponse(`${weatherEndpoint}?lat=${lat}&lon=${lon}${settings}&lang=${options.lang}`)
 }
 
-export const getWeatherByCityAndCountry = async (city, country) => {
-    return await getApiResponse(`${weatherEndpoint}?q=${city},${country}${settings}`)
+export const getWeatherByCity = async (city, options) => {
+    return await getApiResponse(`${weatherEndpoint}?q=${city}${settings}&lang=${options.lang}`)
 }

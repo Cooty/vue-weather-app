@@ -1,7 +1,7 @@
 import {fireEvent, render} from '@testing-library/vue'
 import QueryForm from './QueryForm.vue'
 import getRandomCoordinates from './get-random-coordinates'
-import { getWeatherByCoordinates, getWeatherByCityAndCountry } from './api'
+import { getWeatherByCoordinates, getWeatherByCity } from './api'
 
 jest.mock('../../infrastructure/environment', () => {
     return {
@@ -19,13 +19,24 @@ jest.mock('./api', () => {
 
             return successResponse;
         }),
-        getWeatherByCityAndCountry: jest.fn().mockImplementation(async () => {
+        getWeatherByCity: jest.fn().mockImplementation(async () => {
             const { default: successResponse } = await import('./mocks/weather-success');
 
             return successResponse;
         })
     };
 });
+
+const dummyTranslations = {
+    'messages.cityPlaceholder': 'Type your city',
+    'messages.submit': 'Check the weather!'
+}
+const mocks = {
+    $t: (key) => dummyTranslations[key],
+    $i18n: {
+        locale: 'en'
+    }
+}
 
 describe('A component for querying weather data', () => {
     it('calls the API with random coordinates and the form is in the default state', () => {
@@ -35,29 +46,29 @@ describe('A component for querying weather data', () => {
             return {lat, lon}
         })
 
-        const { getByText, getByPlaceholderText, getByDisplayValue } = render(QueryForm)
+        const { getByText, getByPlaceholderText } = render(QueryForm, {
+            mocks
+        })
 
         expect(getRandomCoordinates).toHaveBeenCalledTimes(1)
         expect(getWeatherByCoordinates).toHaveBeenCalledTimes(1)
-        expect(getWeatherByCoordinates).toHaveBeenCalledWith(lat, lon)
+        expect(getWeatherByCoordinates).toHaveBeenCalledWith(lat, lon, {lang: 'en'})
         expect(getByText('Check the weather!')).toBeDisabled()
         expect(getByPlaceholderText('Type your city')).toBeVisible()
-        expect(getByDisplayValue('Select a country')).toBeVisible()
     })
 
     it('calls the API with a given city and country when submitting the form', async () => {
-        const { getByText, getByPlaceholderText, getByDisplayValue } = render(QueryForm)
+        const { getByText, getByPlaceholderText } = render(QueryForm, {
+            mocks
+        })
         const city = 'Budapest'
-        const country = 'HU'
 
         const cityInput = getByPlaceholderText('Type your city')
         await fireEvent.update(cityInput, city)
-        const countrySelect = getByDisplayValue('Select a country')
-        await fireEvent.update(countrySelect, country)
         const button = getByText('Check the weather!')
         expect(button).toBeEnabled()
         await fireEvent.click(button)
-        expect(getWeatherByCityAndCountry).toHaveBeenCalledTimes(1)
-        expect(getWeatherByCityAndCountry).toHaveBeenCalledWith(city, country)
+        expect(getWeatherByCity).toHaveBeenCalledTimes(1)
+        expect(getWeatherByCity).toHaveBeenCalledWith(city, {lang: 'en'})
     })
 })

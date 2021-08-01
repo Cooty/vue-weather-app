@@ -27,12 +27,6 @@ describe('an object for storing data that\'s globally accessible', () => {
         expect(store.state.city).toEqual(city)
     })
 
-    it('can store the county', () => {
-        const country = 'HU'
-        store.setCountryCode(country)
-        expect(store.state.countryCode).toEqual(country)
-    })
-
     it('can store the latitude', () => {
         const lat = 40.32323232
         store.setLat(lat)

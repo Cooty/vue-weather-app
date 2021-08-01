@@ -6,7 +6,6 @@ const store = {
     state: {
         weatherData: new WeatherData(),
         city: '',
-        countryCode: '',
         lat: 0,
         lon: 0,
         isLoading: true,
@@ -20,10 +19,6 @@ const store = {
     setCity(newValue) {
         if(this.debug) console.log('setCity triggered with', newValue)
         this.state.city = newValue
-    },
-    setCountryCode(newValue) {
-        if(this.debug) console.log('setCountryCode triggered with', newValue)
-        this.state.countryCode = newValue
     },
     setLat(newValue) {
         if(this.debug) console.log('setLat triggered with', newValue)

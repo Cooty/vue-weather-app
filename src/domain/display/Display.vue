@@ -4,11 +4,11 @@
     class="shadow"
   >
     <text-row :bold="true">
-      <template v-if="city && countryCode">
-        The weather for {{ city }} ({{ countryCode.toUpperCase() }}) is:
+      <template v-if="city">
+        {{ $t('messages.weatherForCity', {city}) }}
       </template>
       <template v-else>
-        The weather for a random coordinate (lat: {{ lat }}, lon: {{ lon }}) is:
+        {{ $t('messages.weatherForCoordinates', {lat, lon}) }}
       </template>
     </text-row>
     <div class="d-flex flex-nowrap justify-content-between">
@@ -22,17 +22,17 @@
       </div>
     </div>
     <text-row>
-      feels like <formatted-temperature :temp="weatherData.feelsLike" />
+      {{ $t('messages.feelsLike') }} <formatted-temperature :temp="weatherData.feelsLike" />
     </text-row>
     <divider />
     <text-row :muted="true">
-      Humidity: {{ weatherData.humidity }}%
+      {{ $t('messages.humidity') }}: {{ weatherData.humidity }}%
     </text-row>
     <text-row
       :muted="true"
       :no-bottom-margin="true"
     >
-      Pressure: {{ weatherData.pressure }}hPa
+      {{ $t('messages.pressure') }}: {{ weatherData.pressure }}hPa
     </text-row>
   </b-card>
 </template>
@@ -67,10 +67,6 @@ export default {
       default: 0
     },
     city: {
-      type: String,
-      default: ''
-    },
-    countryCode: {
       type: String,
       default: ''
     }

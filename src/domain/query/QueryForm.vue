@@ -3,25 +3,14 @@
     <wrapper>
       <b-form @submit.prevent="submitHandler">
         <b-form-group
-          label="Country:"
-          label-for="select-country"
-        >
-          <b-form-select
-            id="select-country"
-            v-model="query.country"
-            :options="countries"
-            required
-          />
-        </b-form-group>
-        <b-form-group
-          label="City:"
+          :label="$t('messages.cityLabel')"
           label-for="input-city"
         >
           <b-form-input
             id="input-city"
-            v-model="query.city"
+            v-model="city"
             name="city"
-            placeholder="Type your city"
+            :placeholder="$t('messages.cityPlaceholder')"
             required
           />
         </b-form-group>
@@ -31,7 +20,7 @@
             variant="primary"
             :disabled="!valid || appState.isLoading"
           >
-            Check the weather!
+            {{ $t('messages.submit') }}
           </b-button>
         </b-form-group>
       </b-form>
@@ -41,13 +30,23 @@
 
 <script>
 import Wrapper from '../../ui/Wrapper.vue'
-import {BForm, BFormGroup, BFormInput, BFormSelect, BButton} from 'bootstrap-vue'
-import countryOptions from './country-options'
+import {
+  BForm,
+  BFormGroup,
+  BFormInput,
+  BButton,
+} from 'bootstrap-vue'
 import getRandomCoordinates from './get-random-coordinates'
-import {getWeatherByCityAndCountry, getWeatherByCoordinates} from './api'
-import WeatherData from '../../infrastructure/model/WeatherData'
+import {getWeatherByCity, getWeatherByCoordinates} from './api'
 import store from '../../infrastructure/store'
 import cache from '../../infrastructure/cache'
+import {
+  makeWeatherData,
+  errorHandler,
+  setToLoadingState,
+  setCityData,
+  setCoordsData
+} from '../../infrastructure/data-update'
 
 export default {
   name: 'QueryForm',
@@ -56,79 +55,60 @@ export default {
     BForm,
     BFormInput,
     BFormGroup,
-    BFormSelect,
-    BButton
+    BButton,
   },
   data() {
     return {
-      query: {
-        city: '',
-        country: null,
-      },
-      countries: [{ text: 'Select a country', value: null }, ...countryOptions],
-      appState: store.state
+      city: '',
+      appState: store.state,
     }
   },
   computed: {
     valid: function() {
-      return this.query.city && this.query.country
+      return this.city
     }
   },
   mounted() {
     this.mountHandler()
   },
   methods: {
-    errorHandler: (e) => {
-      store.setIsError(true)
-      store.setErrorMessage(e.message)
-    },
-    makeWeatherData: (response) => {
-      return new WeatherData(
-        response.main.temp,
-        response.weather[0].description,
-        response.main.feels_like,
-        response.main.humidity,
-        response.main.pressure
-      )
-    },
     submitHandler: async function() {
-      store.setIsLoading(true)
-      store.setErrorMessage('')
-      store.setIsError(false)
+      setToLoadingState(store)
       try {
-        let weatherData = cache.getFromCache(`${this.query.city}${this.query.country}`)
+        const cacheKey = `${this.city}${this.$i18n.locale}`
+        let weatherData = cache.getFromCache(cacheKey)
 
         if(!weatherData) {
-          const weatherApiResponse = await getWeatherByCityAndCountry(this.query.city, this.query.country)
-          weatherData = this.makeWeatherData(weatherApiResponse)
-          cache.saveToCache(`${this.query.city}${this.query.country}`, weatherData)
+          const weatherApiResponse = await getWeatherByCity(
+            this.city,
+            {lang: this.$i18n.locale}
+          )
+          weatherData = makeWeatherData(weatherApiResponse)
+          cache.saveToCache(cacheKey, weatherData)
         }
 
-        store.setWeatherData(weatherData)
-        store.setLat(0)
-        store.setLon(0)
-        store.setCity(this.query.city)
-        store.setCountryCode(this.query.country)
-
+        setCityData(weatherData, this.city, store)
       } catch (e) {
-        this.errorHandler(e)
+        errorHandler(e, store)
+      } finally {
+        store.setIsLoading(false)
       }
-      store.setIsLoading(false)
     },
     mountHandler: async function() {
       const coords = getRandomCoordinates()
       try {
-        const weatherApiResponse = await getWeatherByCoordinates(coords.lat, coords.lon)
-        const weatherData = this.makeWeatherData(weatherApiResponse)
-
-        store.setWeatherData(weatherData)
-        store.setLat(coords.lat)
-        store.setLon(coords.lon)
+        const weatherApiResponse = await getWeatherByCoordinates(
+          coords.lat,
+          coords.lon,
+          {lang: this.$i18n.locale}
+        )
+        const weatherData = makeWeatherData(weatherApiResponse)
+        setCoordsData(weatherData, coords, store)
       } catch (e) {
-        this.errorHandler(e)
+        errorHandler(e, store)
+      } finally {
+        store.setIsLoading(false)
       }
-
-      store.setIsLoading(false)
     }
   }
 }

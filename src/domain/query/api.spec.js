@@ -1,4 +1,4 @@
-import { getWeatherByCityAndCountry, getWeatherByCoordinates } from './api'
+import { getWeatherByCity, getWeatherByCoordinates } from './api'
 import successResponse from './mocks/weather-success'
 
 jest.mock('../../infrastructure/environment', () => {
@@ -16,7 +16,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
 
-        const weatherResults = await getWeatherByCityAndCountry('Burgas', 'BG')
+        const weatherResults = await getWeatherByCity('Burgas', {lang: 'en'})
 
         expect(weatherResults.main.temp).toEqual(24.06)
         expect(weatherResults.main.feels_like).toEqual(24.32)
@@ -34,7 +34,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
         try {
-            await getWeatherByCityAndCountry('Burgas', 'BA')
+            await getWeatherByCity('Burgas', {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('We couldn\'t get the weather data for that location')
@@ -47,13 +47,13 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             Promise.resolve({
                 status: 404,
                 json: () => Promise.resolve({
-                    "cod": "404",
+                    "code": "404",
                     "message": "city not found"
                 }),
             })
         );
         try {
-            await getWeatherByCityAndCountry('Narnia', 'NA')
+            await getWeatherByCity('Narnia', {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('We couldn\'t get the weather data for that location')
@@ -69,7 +69,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
 
-        const weatherResults = await getWeatherByCoordinates(47.9291607, 20.3213702)
+        const weatherResults = await getWeatherByCoordinates(47.9291607, 20.3213702, {lang: 'en'})
 
         expect(weatherResults.main.temp).toEqual(24.06)
         expect(weatherResults.main.feels_like).toEqual(24.32)
@@ -87,7 +87,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
         try {
-            await getWeatherByCoordinates(47.9291607, 20.3213702)
+            await getWeatherByCoordinates(47.9291607, 20.3213702, {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('We couldn\'t get the weather data for that location')
@@ -100,13 +100,13 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             Promise.resolve({
                 status: 400,
                 json: () => Promise.resolve({
-                    "cod": "400",
+                    "code": "400",
                     "message": "wrong latitude"
                 }),
             })
         );
         try {
-            await getWeatherByCoordinates(-47888, 0)
+            await getWeatherByCoordinates(-47888, 0, {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('We couldn\'t get the weather data for that location')

@@ -2,6 +2,7 @@ import {render} from '@testing-library/vue'
 import App from './App.vue'
 import successResponse from '../domain/query/mocks/weather-success';
 import WeatherData from '../infrastructure/model/WeatherData';
+// import i18n from '../infrastructure/i18n/i18n'
 
 jest.mock('../infrastructure/environment', () => {
     return {
@@ -16,6 +17,18 @@ global.fetch = jest.fn(() =>
     })
 );
 
+const dummyTranslations = {
+    'messages.loading': 'Loading...',
+    'messages.humidity': 'Humidity',
+    'messages.pressure': 'Pressure',
+}
+const mocks = {
+    $t: (key) => dummyTranslations[key],
+    $i18n: {
+        locale: 'en'
+    }
+}
+
 describe('The main component for displaying the application', () => {
     it('displays a loading state when the data indicates', () => {
         const { getByTitle } = render(App, {
@@ -23,7 +36,8 @@ describe('The main component for displaying the application', () => {
                 appState: {
                     isLoading: true
                 }
-            })
+            }),
+            mocks,
         })
 
         expect(getByTitle('Loading...')).toBeVisible()
@@ -37,7 +51,8 @@ describe('The main component for displaying the application', () => {
                     isError: true,
                     errorMessage: dummyErrorMessage
                 }
-            })
+            }),
+            mocks
         })
 
         expect(getByText(dummyErrorMessage)).toBeVisible()
@@ -60,7 +75,8 @@ describe('The main component for displaying the application', () => {
                         dummyPressure
                     )
                 }
-            })
+            }),
+            mocks
         })
 
         expect(getByText(`${dummyTemp}°C`)).toBeVisible()

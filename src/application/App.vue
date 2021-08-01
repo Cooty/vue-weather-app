@@ -1,12 +1,12 @@
 <template>
   <main class="sticky-footer-container">
-    <section class="sticky-footer-content d-flex flex-column justify-content-center">
+    <section class="sticky-footer-content d-flex flex-column justify-content-center position-relative">
+      <language-changer />
       <wrapper>
         <template v-if="appState.weatherData.temp && !appState.isLoading && !appState.isError">
           <display
             :weather-data="appState.weatherData"
             :city="appState.city"
-            :country-code="appState.countryCode"
             :lat="appState.lat"
             :lon="appState.lon"
           />
@@ -14,9 +14,9 @@
         <template v-else-if="appState.isLoading">
           <div class="text-center">
             <b-spinner
-              title="Loading..."
+              :title="$t('messages.loading')"
               variant="primary"
-              label="Loading"
+              :label="$t('messages.loading')"
             />
           </div>
         </template>
@@ -42,6 +42,7 @@ import Display from '../domain/display/Display.vue'
 import store from '../infrastructure/store'
 import Wrapper from '../ui/Wrapper.vue'
 import {BSpinner, BAlert} from 'bootstrap-vue'
+import LanguageChanger from '../infrastructure/i18n/LanguageChanger.vue';
 
 export default {
   name: 'App',
@@ -50,7 +51,8 @@ export default {
     Display,
     BSpinner,
     BAlert,
-    Wrapper
+    Wrapper,
+    LanguageChanger
   },
   data() {
     return {

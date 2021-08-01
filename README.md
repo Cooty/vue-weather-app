@@ -1,9 +1,6 @@
 # Weather App
 
-Coding challenge for Kloeckner.i by [Tamas Kuti](kutitamas86@gmail.com).
-A simple client for [OpenWeatherMap](https://openweathermap.org/) API.
-
-**For internal use only!**
+A simple client for [OpenWeatherMap](https://openweathermap.org/) API made with [Vue.js](https://vuejs.org/).
 
 ## Usage
 
@@ -80,11 +77,7 @@ The architecture mostly follows the convention for [Elegant Frontend Architectur
 
 ## TODOs and further ideas
 
-- Add more tests :)
-  Vite's use of `import.meta.env` doesn't seem to work with Jest ([see issue](https://github.com/facebook/jest/issues/9213))
 - Dockerize the application for both dev-environment and production
-- Implement i18n for both UI and API
 - Add dynamic icons to temperature (based on degrees and the description)
 - Add unit switcher, so the user can select between metric and imperial units, since the API supports this
 - Add an interactive map that displays both the City / Country or the initial random location
-- Add a combo-box instead of a plain select for the country selector, where the user can start typing the name of the country and the list will filter accordingly
