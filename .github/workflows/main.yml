@@ -15,6 +15,9 @@ jobs:
               with:
                   node-version: '14'
 
+            # An .env file has to be created on-the-fly as it's not in VCS
+            # We also have to specify the BASE_URL variable so that the scr attribute of the generated script tags
+            # will point to the right location
             - name: Install, lint, test and build
               run: |
                   echo "${{secrets.ENV}}" > .env
@@ -24,7 +27,7 @@ jobs:
                   npm run test
                   npm run build
 
-            # @see https://github.com/marketplace/actions/deploy-to-github-pages
+            # @see https://github.com/JamesIves/github-pages-deploy-action
             # @see https://docs.github.com/en/pages
             - name: Deploy
               uses: JamesIves/github-pages-deploy-action@4.1.1
