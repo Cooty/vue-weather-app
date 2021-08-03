@@ -1,8 +1,8 @@
-# Weather App
+# ⛅ Weather App
 
 A simple client for [OpenWeatherMap](https://openweathermap.org/) API made with [Vue.js](https://vuejs.org/).
 
-## Usage
+## 🔧 Usage
 
 Install dependencies
 ```shell
@@ -19,7 +19,7 @@ To build it and start the dev-server in preview mode
 npm run build && npm run serve
 ```
 
-## Project setup
+## 🏗️ Project setup
 
 The project was scaffolded with [Vite's](https://vitejs.dev/) CLI, with the Vue.js template.
 
@@ -32,7 +32,7 @@ We've manually reverted Vue.js's version to `2.6.14` and adjusted the `devDepend
 
 [`@vitejs/plugin-legacy`](https://www.npmjs.com/package/@vitejs/plugin-legacy) was added and configured to support IE11 and up (see `vite.config.js`).
 
-### Conventions
+### 📜 Conventions
 
 We use the recommended coding conventions of Vue.js and setup [ESLint](https://eslint.org/) via [`eslint-plugin-vue`](https://eslint.vuejs.org/).
 You can run the linter manually via NPM-scripts with
@@ -46,11 +46,11 @@ Currently, we use the settings `plugin:vue/recommended`, for full list of rules 
 
 General file-formatting rules are set up via [EditorConfig](https://editorconfig.org/), see `.editorconfig` for details.
 
-#### File naming
+#### ✍️ File naming
 Files and folders should generally be named in `kebab-case`.
 Exceptions are `*.vue` files and `*.js` files that export a single class, in these cases use `PascalCase`.
 
-### Testing
+### 🧪 Testing
 
 Unit testing is set up using [Jest](https://jestjs.io/) as test runner and [Vue Testing Library](https://testing-library.com/docs/vue-testing-library/intro).
 Test can be run with
@@ -65,17 +65,20 @@ To generate coverage report, run
 npm run coverage
 ```
 
-### Architecture
+### 🏛️ Architecture
 
 The architecture mostly follows the convention for [Elegant Frontend Architecture](https://michalzalecki.com/elegant-frontend-architecture/) by Michal Zalecki.
 
-## Tech stack
+## 🥞 Tech stack
 
 - Framework: [Vue.js (V2)](https://vuejs.org/v2/guide/)
 - UI library: [Bootstrap Vue](https://bootstrap-vue.org/)
 - Build-tool and development environment: [Vite](https://vitejs.dev/)
 
-## TODOs and further ideas
+## 🚢 Deployment
+The app is currently deployed to [GitHub Pages](https://pages.github.com/), using automated GitHub actions (see `~/.github/workflows/main.yml`).
+
+## ✅ TODOs and further ideas
 
 - Dockerize the application for both dev-environment and production
 - Add dynamic icons to temperature (based on degrees and the description)
