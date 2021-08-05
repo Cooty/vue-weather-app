@@ -56,4 +56,12 @@ describe('an object for storing data that\'s globally accessible', () => {
         store.setErrorMessage(errorMessage)
         expect(store.state.errorMessage).toEqual(errorMessage)
     })
+
+    it('can store the ui state of the settings dropdown in the header', () => {
+        // should be false by default
+        expect(store.state.isRightSectionOpened).toBe(false)
+
+        store.setIsRightSectionOpened(true)
+        expect(store.state.isRightSectionOpened).toBe(true)
+    })
 })

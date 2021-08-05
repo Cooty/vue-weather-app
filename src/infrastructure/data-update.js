@@ -1,15 +1,3 @@
-import WeatherData from './model/WeatherData';
-
-export const makeWeatherData = (response) => {
-    return new WeatherData(
-        response.main.temp,
-        response.weather[0].description,
-        response.main.feels_like,
-        response.main.humidity,
-        response.main.pressure
-    )
-}
-
 export const errorHandler = (e, store) => {
     store.setIsError(true)
     store.setErrorMessage(e.message)
@@ -19,6 +7,7 @@ export const setToLoadingState = (store) => {
     store.setIsLoading(true)
     store.setErrorMessage('')
     store.setIsError(false)
+    store.setIsRightSectionOpened(false)
 }
 
 export const setCityData = (weatherData, city, store) => {

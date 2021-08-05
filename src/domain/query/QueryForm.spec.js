@@ -46,26 +46,26 @@ describe('A component for querying weather data', () => {
             return {lat, lon}
         })
 
-        const { getByText, getByPlaceholderText } = render(QueryForm, {
+        const { getByPlaceholderText, getByLabelText } = render(QueryForm, {
             mocks
         })
 
         expect(getRandomCoordinates).toHaveBeenCalledTimes(1)
         expect(getWeatherByCoordinates).toHaveBeenCalledTimes(1)
         expect(getWeatherByCoordinates).toHaveBeenCalledWith(lat, lon, {lang: 'en'})
-        expect(getByText('Check the weather!')).toBeDisabled()
+        expect(getByLabelText('Check the weather!')).toBeDisabled()
         expect(getByPlaceholderText('Type your city')).toBeVisible()
     })
 
     it('calls the API with a given city and country when submitting the form', async () => {
-        const { getByText, getByPlaceholderText } = render(QueryForm, {
+        const { getByPlaceholderText, getByLabelText } = render(QueryForm, {
             mocks
         })
         const city = 'Budapest'
 
         const cityInput = getByPlaceholderText('Type your city')
         await fireEvent.update(cityInput, city)
-        const button = getByText('Check the weather!')
+        const button = getByLabelText('Check the weather!')
         expect(button).toBeEnabled()
         await fireEvent.click(button)
         expect(getWeatherByCity).toHaveBeenCalledTimes(1)
