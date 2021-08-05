@@ -1,11 +1,9 @@
 <template>
-  <div class="language-changer position-absolute">
-    <b-form-select
-      v-model="$i18n.locale"
-      :options="languages"
-      @change="changeHandler"
-    />
-  </div>
+  <b-form-select
+    v-model="$i18n.locale"
+    :options="languages"
+    @change="changeHandler"
+  />
 </template>
 
 <script>
@@ -15,11 +13,11 @@ import store from '../store'
 import cache from '../cache'
 import {getWeatherByCity, getWeatherByCoordinates} from '../../domain/query/api';
 import {
-  makeWeatherData,
   errorHandler,
   setToLoadingState,
   setCityData
 } from '../data-update'
+import {makeWeatherData} from '../factory/weather-data'
 
 export default {
   name: 'LanguageChanger',
@@ -70,10 +68,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.language-changer {
-  top: 15px;
-  right: 15px;
-}
-</style>

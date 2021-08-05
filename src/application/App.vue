@@ -1,7 +1,15 @@
 <template>
-  <main class="sticky-footer-container">
-    <section class="sticky-footer-content d-flex flex-column justify-content-center position-relative">
-      <language-changer />
+  <app-main>
+    <app-header>
+      <template #left>
+        <query-form />
+      </template>
+      <template #right>
+        <language-changer />
+      </template>
+    </app-header>
+
+    <app-content>
       <wrapper>
         <template v-if="appState.weatherData.temp && !appState.isLoading && !appState.isError">
           <display
@@ -29,11 +37,8 @@
           </b-alert>
         </template>
       </wrapper>
-    </section>
-    <section class="sticky-footer-footer">
-      <query-form />
-    </section>
-  </main>
+    </app-content>
+  </app-main>
 </template>
 
 <script>
@@ -41,6 +46,9 @@ import QueryForm from '../domain/query/QueryForm.vue'
 import Display from '../domain/display/Display.vue'
 import store from '../infrastructure/store'
 import Wrapper from '../ui/Wrapper.vue'
+import AppMain from '../ui/AppMain.vue'
+import AppHeader from '../ui/AppHeader.vue'
+import AppContent from '../ui/AppContent.vue'
 import {BSpinner, BAlert} from 'bootstrap-vue'
 import LanguageChanger from '../infrastructure/i18n/LanguageChanger.vue';
 
@@ -52,7 +60,10 @@ export default {
     BSpinner,
     BAlert,
     Wrapper,
-    LanguageChanger
+    LanguageChanger,
+    AppHeader,
+    AppMain,
+    AppContent
   },
   data() {
     return {

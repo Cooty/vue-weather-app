@@ -10,7 +10,8 @@ const store = {
         lon: 0,
         isLoading: true,
         isError: false,
-        errorMessage: ''
+        errorMessage: '',
+        isRightSectionOpened: false,
     },
     setWeatherData(newValue) {
         if(this.debug) console.log('setWeatherDataAction triggered with', newValue)
@@ -39,6 +40,10 @@ const store = {
     setErrorMessage(newValue) {
         if(this.debug) console.log('setErrorMessage triggered with', newValue)
         this.state.errorMessage = newValue
+    },
+    setIsRightSectionOpened(newValue) {
+        if(this.debug) console.log('setIsRightSectionOpened triggered with', newValue)
+        this.state.isRightSectionOpened = newValue
     }
 }
 
