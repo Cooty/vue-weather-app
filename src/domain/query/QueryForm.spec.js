@@ -1,7 +1,7 @@
 import {fireEvent, render} from '@testing-library/vue'
 import QueryForm from './QueryForm.vue'
-import getRandomCoordinates from './get-random-coordinates'
-import { getWeatherByCoordinates, getWeatherByCity } from './api'
+import getRandomCoordinates from '../../infrastructure/get-random-coordinates'
+import store from '../../infrastructure/store';
 
 jest.mock('../../infrastructure/environment', () => {
     return {
@@ -10,22 +10,7 @@ jest.mock('../../infrastructure/environment', () => {
     }
 })
 
-jest.mock('./get-random-coordinates')
-
-jest.mock('./api', () => {
-    return {
-        getWeatherByCoordinates: jest.fn().mockImplementation(async () => {
-            const { default: successResponse } = await import('./mocks/weather-success');
-
-            return successResponse;
-        }),
-        getWeatherByCity: jest.fn().mockImplementation(async () => {
-            const { default: successResponse } = await import('./mocks/weather-success');
-
-            return successResponse;
-        })
-    };
-});
+jest.mock('../../infrastructure/get-random-coordinates')
 
 const dummyTranslations = {
     'messages.cityPlaceholder': 'Type your city',
@@ -35,7 +20,8 @@ const mocks = {
     $t: (key) => dummyTranslations[key],
     $i18n: {
         locale: 'en'
-    }
+    },
+    $bubble: jest.fn()
 }
 
 describe('A component for querying weather data', () => {
@@ -51,24 +37,21 @@ describe('A component for querying weather data', () => {
         })
 
         expect(getRandomCoordinates).toHaveBeenCalledTimes(1)
-        expect(getWeatherByCoordinates).toHaveBeenCalledTimes(1)
-        expect(getWeatherByCoordinates).toHaveBeenCalledWith(lat, lon, {lang: 'en'})
         expect(getByLabelText('Check the weather!')).toBeDisabled()
         expect(getByPlaceholderText('Type your city')).toBeVisible()
     })
 
-    it('calls the API with a given city and country when submitting the form', async () => {
+    it('calls the API with a given city when submitting the form', async () => {
         const { getByPlaceholderText, getByLabelText } = render(QueryForm, {
             mocks
         })
         const city = 'Budapest'
 
+        store.setIsLoading(false)
+
         const cityInput = getByPlaceholderText('Type your city')
         await fireEvent.update(cityInput, city)
         const button = getByLabelText('Check the weather!')
         expect(button).toBeEnabled()
-        await fireEvent.click(button)
-        expect(getWeatherByCity).toHaveBeenCalledTimes(1)
-        expect(getWeatherByCity).toHaveBeenCalledWith(city, {lang: 'en'})
     })
 })

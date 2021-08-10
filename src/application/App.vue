@@ -1,5 +1,5 @@
 <template>
-  <app-main>
+  <app-main @update-weather="onUpdateWeatherHandler">
     <app-header>
       <template #left>
         <query-form />
@@ -51,6 +51,15 @@ import AppHeader from '../ui/AppHeader.vue'
 import AppContent from '../ui/AppContent.vue'
 import {BSpinner, BAlert} from 'bootstrap-vue'
 import LanguageChanger from '../infrastructure/i18n/LanguageChanger.vue';
+import {getWeatherByCity, getWeatherByCoordinates} from '../infrastructure/api/api';
+import {makeWeatherData} from '../infrastructure/factory/weather-data';
+import {
+  errorHandler,
+  setCityData,
+  setCoordsData,
+  setToLoadingState
+} from '../infrastructure/data-update';
+import cache from '../infrastructure/cache';
 
 export default {
   name: 'App',
@@ -68,6 +77,43 @@ export default {
   data() {
     return {
       appState: store.state
+    }
+  },
+  methods: {
+    onUpdateWeatherHandler: async (event) => {
+      setToLoadingState(store)
+      let weatherData;
+      try {
+        const cacheKeyLocationPrefix = event.coords ?
+          '' + event.coords.lat + event.coords.lon
+          :
+          event.city
+        const cacheKey = `${cacheKeyLocationPrefix}${event.options.lang}`
+        const cachedWeatherData = cache.getFromCache(cacheKey)
+
+        if(!cachedWeatherData) {
+          const weatherApiResponse = event.coords ? await getWeatherByCoordinates(
+            event.coords.lat,
+            event.coords.lon,
+            event.options
+          ) : await getWeatherByCity(event.city, event.options)
+
+          weatherData = makeWeatherData(weatherApiResponse)
+          cache.saveToCache(cacheKey, weatherData)
+        } else {
+          weatherData = cachedWeatherData
+        }
+
+        if(event.coords) {
+          setCoordsData(weatherData, event.coords, store)
+        } else {
+          setCityData(weatherData, event.city, store)
+        }
+      } catch(e) {
+        errorHandler(e, store)
+      } finally {
+        store.setIsLoading(false)
+      }
     }
   }
 }

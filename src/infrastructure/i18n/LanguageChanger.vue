@@ -10,14 +10,6 @@
 import {BFormSelect} from 'bootstrap-vue'
 import langCodes from './lang-codes'
 import store from '../store'
-import cache from '../cache'
-import {getWeatherByCity, getWeatherByCoordinates} from '../../domain/query/api';
-import {
-  errorHandler,
-  setToLoadingState,
-  setCityData
-} from '../data-update'
-import {makeWeatherData} from '../factory/weather-data'
 
 export default {
   name: 'LanguageChanger',
@@ -35,34 +27,21 @@ export default {
     }
   },
   methods: {
-    async changeHandler(value) {
-      setToLoadingState(store)
-      try {
-        if(store.state.lat && store.state.lon) {
-          const weatherApiResponse = await getWeatherByCoordinates(
-            store.state.lat,
-            store.state.lon,
-            {lang: value}
-          )
-          store.setWeatherData(makeWeatherData(weatherApiResponse))
-        } else {
-          const cacheKey = `${store.state.city}${value}`
-          let weatherData = cache.getFromCache(cacheKey)
-
-          if(!weatherData) {
-            const weatherApiResponse = await getWeatherByCity(
-              store.state.city,
-              {lang: value}
-            )
-            weatherData = makeWeatherData(weatherApiResponse)
-            cache.saveToCache(cacheKey, weatherData)
+    changeHandler(value) {
+      if(store.state.lat && store.state.lon) {
+        this.$bubble('update-weather', {
+          coords: {lat: store.state.lat, lon: store.state.lon},
+          options: {
+            lang: value
           }
-          setCityData(weatherData, store.state.city, store)
-        }
-      } catch (e) {
-        errorHandler(e, store)
-      } finally {
-        store.setIsLoading(false)
+        })
+      } else {
+        this.$bubble('update-weather', {
+          city: store.state.city,
+          options: {
+            lang: value
+          }
+        })
       }
     }
   }
