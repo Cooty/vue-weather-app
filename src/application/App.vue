@@ -32,7 +32,7 @@
             show
             variant="danger"
           >
-            {{ appState.errorMessage }}
+            {{ $t(appState.errorMessage) }}
           </b-alert>
         </template>
       </wrapper>

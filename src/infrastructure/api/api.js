@@ -10,7 +10,7 @@ const settings = `&appid=${key}&units=${preferredUnits}`
 const getApiResponse = async (url) => {
     const response = await fetch(url)
     if(response.status !== 200) {
-        throw new Error('We couldn\'t get the weather data for that location')
+        throw new Error('messages.error')
     }
     return await response.json()
 }

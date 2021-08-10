@@ -37,7 +37,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             await getWeatherByCity('Burgas', {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
-            expect(e.message).toBe('We couldn\'t get the weather data for that location')
+            expect(e.message).toBe('messages.error')
         }
 
     })
@@ -56,7 +56,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             await getWeatherByCity('Narnia', {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
-            expect(e.message).toBe('We couldn\'t get the weather data for that location')
+            expect(e.message).toBe('messages.error')
         }
 
     })
@@ -90,7 +90,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             await getWeatherByCoordinates(47.9291607, 20.3213702, {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
-            expect(e.message).toBe('We couldn\'t get the weather data for that location')
+            expect(e.message).toBe('messages.error')
         }
 
     })
@@ -109,7 +109,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             await getWeatherByCoordinates(-47888, 0, {lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
-            expect(e.message).toBe('We couldn\'t get the weather data for that location')
+            expect(e.message).toBe('messages.error')
         }
 
     })

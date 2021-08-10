@@ -9,5 +9,6 @@ export default {
         cityPlaceholder: 'Geben Sie Ihre Stadt ein',
         submit: 'Wetter anschauen!',
         loading: 'Wird geladen...',
+        error: 'Wir konnten die Wetterdaten für diesen Ort nicht abrufen'
     }
 }
