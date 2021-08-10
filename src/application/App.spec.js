@@ -3,7 +3,6 @@ import App from './App.vue'
 import successResponse from '../infrastructure/api/mocks/weather-success';
 import WeatherData from '../infrastructure/model/WeatherData';
 import store from '../infrastructure/store';
-// import i18n from '../infrastructure/i18n/i18n'
 
 jest.mock('../infrastructure/environment', () => {
     return {
@@ -22,6 +21,7 @@ const dummyTranslations = {
     'messages.loading': 'Loading...',
     'messages.humidity': 'Humidity',
     'messages.pressure': 'Pressure',
+    'messages.error': 'We couldn\'t get the weather data for that location'
 }
 const mocks = {
     $t: (key) => dummyTranslations[key],
@@ -46,7 +46,7 @@ describe('The main component for displaying the application', () => {
     })
 
     it('displays an error state when the data indicates', () => {
-        const dummyErrorMessage = 'Some error has happened'
+        const dummyErrorMessage = 'messages.error'
         store.setIsLoading(false)
         const { getByText } = render(App, {
             data: () => ({
@@ -58,7 +58,7 @@ describe('The main component for displaying the application', () => {
             mocks
         })
 
-        expect(getByText(dummyErrorMessage)).toBeVisible()
+        expect(getByText(dummyTranslations['messages.error'])).toBeVisible()
     })
 
     it('displays the weather when the data indicates', () => {
