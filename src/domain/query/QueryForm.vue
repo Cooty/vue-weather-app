@@ -36,17 +36,8 @@ import {
   BButton,
   BIconSearch
 } from 'bootstrap-vue'
-import getRandomCoordinates from './get-random-coordinates'
-import {getWeatherByCity, getWeatherByCoordinates} from './api'
+import getRandomCoordinates from '../../infrastructure/get-random-coordinates'
 import store from '../../infrastructure/store'
-import cache from '../../infrastructure/cache'
-import {
-  errorHandler,
-  setToLoadingState,
-  setCityData,
-  setCoordsData
-} from '../../infrastructure/data-update'
-import { makeWeatherData } from '../../infrastructure/factory/weather-data'
 
 export default {
   name: 'QueryForm',
@@ -68,46 +59,21 @@ export default {
     }
   },
   mounted() {
-    this.mountHandler()
+    this.$bubble('update-weather', {
+      coords: getRandomCoordinates(),
+      options: {
+        lang: this.$i18n.locale
+      }
+    })
   },
   methods: {
-    submitHandler: async function () {
-      setToLoadingState(store)
-      try {
-        const cacheKey = `${this.city}${this.$i18n.locale}`
-        let weatherData = cache.getFromCache(cacheKey)
-
-        if (!weatherData) {
-          const weatherApiResponse = await getWeatherByCity(
-            this.city,
-            {lang: this.$i18n.locale}
-          )
-          weatherData = makeWeatherData(weatherApiResponse)
-          cache.saveToCache(cacheKey, weatherData)
+    submitHandler() {
+      this.$bubble('update-weather', {
+        city: this.city,
+        options: {
+          lang: this.$i18n.locale
         }
-
-        setCityData(weatherData, this.city, store)
-      } catch (e) {
-        errorHandler(e, store)
-      } finally {
-        store.setIsLoading(false)
-      }
-    },
-    mountHandler: async function () {
-      const coords = getRandomCoordinates()
-      try {
-        const weatherApiResponse = await getWeatherByCoordinates(
-          coords.lat,
-          coords.lon,
-          {lang: this.$i18n.locale}
-        )
-        const weatherData = makeWeatherData(weatherApiResponse)
-        setCoordsData(weatherData, coords, store)
-      } catch (e) {
-        errorHandler(e, store)
-      } finally {
-        store.setIsLoading(false)
-      }
+      })
     }
   }
 }

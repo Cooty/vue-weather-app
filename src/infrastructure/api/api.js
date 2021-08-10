@@ -1,4 +1,4 @@
-import { API_KEY } from '../../infrastructure/environment'
+import { API_KEY } from '../environment'
 
 const key = API_KEY
 const preferredUnits = 'metric'

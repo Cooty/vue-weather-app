@@ -1,7 +1,8 @@
 import {render} from '@testing-library/vue'
 import App from './App.vue'
-import successResponse from '../domain/query/mocks/weather-success';
+import successResponse from '../infrastructure/api/mocks/weather-success';
 import WeatherData from '../infrastructure/model/WeatherData';
+import store from '../infrastructure/store';
 // import i18n from '../infrastructure/i18n/i18n'
 
 jest.mock('../infrastructure/environment', () => {
@@ -26,7 +27,8 @@ const mocks = {
     $t: (key) => dummyTranslations[key],
     $i18n: {
         locale: 'en'
-    }
+    },
+    $bubble: jest.fn()
 }
 
 describe('The main component for displaying the application', () => {
@@ -45,6 +47,7 @@ describe('The main component for displaying the application', () => {
 
     it('displays an error state when the data indicates', () => {
         const dummyErrorMessage = 'Some error has happened'
+        store.setIsLoading(false)
         const { getByText } = render(App, {
             data: () => ({
                 appState: {
