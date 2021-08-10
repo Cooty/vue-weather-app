@@ -1,5 +1,6 @@
-import store from './store';
-import WeatherData from './model/WeatherData';
+import store from './store'
+import WeatherData from './model/WeatherData'
+import Coords from './model/Coords'
 
 jest.mock('./environment', () => {
     return {
@@ -27,16 +28,10 @@ describe('an object for storing data that\'s globally accessible', () => {
         expect(store.state.city).toEqual(city)
     })
 
-    it('can store the latitude', () => {
-        const lat = 40.32323232
-        store.setLat(lat)
-        expect(store.state.lat).toEqual(lat)
-    })
-
-    it('can store the longitude', () => {
-        const lon = 120.32323232
-        store.setLon(lon)
-        expect(store.state.lon).toEqual(lon)
+    it('can store the coordinates', () => {
+        const coords = new Coords(40.32323232, -120.344545)
+        store.setCoords(coords)
+        expect(store.state.coords).toEqual(coords)
     })
 
     it('can store the loading state', () => {

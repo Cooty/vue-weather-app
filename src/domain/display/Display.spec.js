@@ -1,6 +1,7 @@
 import { render } from '@testing-library/vue'
 import Display from './Display.vue'
-import WeatherData from '../../infrastructure/model/WeatherData';
+import WeatherData from '../../infrastructure/model/WeatherData'
+import Coords from '../../infrastructure/model/Coords'
 
 const dummyTemp = 33
 const dummyDescription = 'cloudy'
@@ -16,6 +17,7 @@ const dummyWeatherData = new WeatherData(
 )
 const dummyLat = 42.5061
 const dummyLon = 27.4678
+const dummyCoords = new Coords(dummyLat, dummyLon)
 const dummyCity = 'Budapest'
 const dummyTranslations = {
     'messages.loading': 'Loading...',
@@ -35,7 +37,8 @@ describe('A component for displaying weather data', () => {
     it('renders the weather data', () => {
         const { getByText, container } = render(Display, {
             props: {
-                weatherData: dummyWeatherData
+                weatherData: dummyWeatherData,
+                city: dummyCity
             },
             mocks
         })
@@ -48,19 +51,16 @@ describe('A component for displaying weather data', () => {
     })
 
     it('displays coordinates when they are passed in', () => {
-        const lat = dummyLat
-        const lon = dummyLon
         const { container } = render(Display, {
             props: {
                 weatherData: dummyWeatherData,
-                lat,
-                lon
+                coords: dummyCoords
             },
             mocks
         })
 
-        expect(container).toHaveTextContent(lat.toString())
-        expect(container).toHaveTextContent(lon.toString())
+        expect(container).toHaveTextContent(dummyCoords.lat.toString())
+        expect(container).toHaveTextContent(dummyCoords.lon.toString())
     })
 
     it('displays city and country code when they are passed', () => {

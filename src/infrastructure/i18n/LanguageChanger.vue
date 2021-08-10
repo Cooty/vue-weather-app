@@ -28,21 +28,19 @@ export default {
   },
   methods: {
     changeHandler(value) {
-      if(store.state.lat && store.state.lon) {
-        this.$bubble('update-weather', {
-          coords: {lat: store.state.lat, lon: store.state.lon},
-          options: {
-            lang: value
-          }
-        })
-      } else {
-        this.$bubble('update-weather', {
-          city: store.state.city,
-          options: {
-            lang: value
-          }
-        })
+      const payload = {
+        options: {
+          lang: value
+        }
       }
+
+      if(store.state.coords) {
+        payload.coords = store.state.coords
+      } else {
+        payload.city = store.state.city
+      }
+
+      this.$bubble('update-weather', payload)
     }
   }
 }
