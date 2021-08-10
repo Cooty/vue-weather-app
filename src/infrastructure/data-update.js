@@ -12,13 +12,11 @@ export const setToLoadingState = (store) => {
 
 export const setCityData = (weatherData, city, store) => {
     store.setWeatherData(weatherData)
-    store.setLat(0)
-    store.setLon(0)
+    store.setCoords(null)
     store.setCity(city)
 }
 
 export const setCoordsData = (weatherData, coords, store) => {
     store.setWeatherData(weatherData)
-    store.setLat(coords.lat)
-    store.setLon(coords.lon)
+    store.setCoords(coords)
 }

@@ -11,12 +11,11 @@
 
     <app-content>
       <wrapper>
-        <template v-if="appState.weatherData.temp && !appState.isLoading && !appState.isError">
+        <template v-if="appState.weatherData && !appState.isLoading && !appState.isError">
           <display
             :weather-data="appState.weatherData"
             :city="appState.city"
-            :lat="appState.lat"
-            :lon="appState.lon"
+            :coords="appState.coords"
           />
         </template>
         <template v-else-if="appState.isLoading">

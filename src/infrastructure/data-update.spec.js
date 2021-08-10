@@ -5,6 +5,7 @@ import {
     setCoordsData
 } from './data-update'
 import WeatherData from './model/WeatherData'
+import Coords from './model/Coords'
 
 jest.mock('./environment', () => {
     return {
@@ -54,8 +55,8 @@ describe('A set of functions to handle states that are coupled together', () => 
 
     it('can set weather data by coordinates', async () => {
         const store = await getStore()
-        setCoordsData(mockWeatherData, {lat: 40.121212, lon: -180.2233}, store)
-        expect(store.state.lat).toBe(40.121212)
-        expect(store.state.lon).toBe(-180.2233)
+        setCoordsData(mockWeatherData, new Coords(40.121212, -180.2233), store)
+        expect(store.state.coords.lat).toBe(40.121212)
+        expect(store.state.coords.lon).toBe(-180.2233)
     })
 })

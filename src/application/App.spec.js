@@ -76,7 +76,8 @@ describe('The main component for displaying the application', () => {
                         dummyFeelsLike,
                         dummyHumidity,
                         dummyPressure
-                    )
+                    ),
+                    city: 'Budapest'
                 }
             }),
             mocks

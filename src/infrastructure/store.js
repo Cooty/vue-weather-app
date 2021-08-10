@@ -1,13 +1,11 @@
-import WeatherData from './model/WeatherData'
 import { MODE } from './environment'
 
 const store = {
     debug: MODE === 'development',
     state: {
-        weatherData: new WeatherData(),
+        weatherData: null,
         city: '',
-        lat: 0,
-        lon: 0,
+        coords: null,
         isLoading: true,
         isError: false,
         errorMessage: '',
@@ -21,13 +19,9 @@ const store = {
         if(this.debug) console.log('setCity triggered with', newValue)
         this.state.city = newValue
     },
-    setLat(newValue) {
-        if(this.debug) console.log('setLat triggered with', newValue)
-        this.state.lat = newValue
-    },
-    setLon(newValue) {
-        if(this.debug) console.log('setLon triggered with', newValue)
-        this.state.lon = newValue
+    setCoords(newValue) {
+        if(this.debug) console.log('setCoords triggered with', newValue)
+        this.state.coords = newValue
     },
     setIsLoading(newValue) {
         if(this.debug) console.log('setIsLoading triggered with', newValue)

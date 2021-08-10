@@ -1,9 +1,11 @@
 import getRandomCoordinates from './get-random-coordinates'
+import Coords from './model/Coords';
+
 describe('A helper function to generate random geographical coordinates', () => {
     it('returns an object with a lon and lat key', () => {
         const coords = getRandomCoordinates();
 
-        expect(typeof coords === 'object').toBeTruthy()
+        expect(coords instanceof Coords).toBeTruthy()
         expect(coords).toHaveProperty('lat')
         expect(coords).toHaveProperty('lon')
     })

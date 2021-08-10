@@ -8,7 +8,7 @@
         {{ $t('messages.weatherForCity', {city}) }}
       </template>
       <template v-else>
-        {{ $t('messages.weatherForCoordinates', {lat, lon}) }}
+        {{ $t('messages.weatherForCoordinates', {lat: coords.lat, lon: coords.lon}) }}
       </template>
     </text-row>
     <div class="d-flex flex-nowrap justify-content-between">
@@ -43,6 +43,7 @@ import Divider from '../../ui/Divider.vue'
 import FormattedTemperature from './FormattedTemperature.vue'
 import {BCard, BBadge} from 'bootstrap-vue'
 import WeatherData from '../../infrastructure/model/WeatherData'
+import Coords from '../../infrastructure/model/Coords'
 
 export default {
   name: 'Display',
@@ -56,15 +57,11 @@ export default {
   props: {
     weatherData: {
       type: WeatherData,
-      required: true
+      default: null
     },
-    lat: {
-      type: Number,
-      default: 0
-    },
-    lon: {
-      type: Number,
-      default: 0
+    coords: {
+      type: Coords,
+      default: null
     },
     city: {
       type: String,
