@@ -1,4 +1,4 @@
-import { getWeatherByCity, getWeatherByCoordinates } from './api'
+import { getWeather } from './api'
 import successResponse from './mocks/weather-success'
 
 jest.mock('../../infrastructure/environment', () => {
@@ -8,7 +8,7 @@ jest.mock('../../infrastructure/environment', () => {
 });
 
 describe('Fetches weather data from OpenWeatherMaps API', () => {
-    it('Fetches weather data for a city and country which contains all the necessary fields that we\'re using', async () => {
+    it('Fetches weather data for a city which contains all the necessary fields that we\'re using', async () => {
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 status: 200,
@@ -16,7 +16,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
 
-        const weatherResults = await getWeatherByCity('Burgas', {lang: 'en'})
+        const weatherResults = await getWeather({city: 'Burgas', lang: 'en'})
 
         expect(weatherResults.main.temp).toEqual(24.06)
         expect(weatherResults.main.feels_like).toEqual(24.32)
@@ -34,7 +34,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
         try {
-            await getWeatherByCity('Burgas', {lang: 'en'})
+            await getWeather({city: 'Burgas', lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('messages.error')
@@ -53,7 +53,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
         try {
-            await getWeatherByCity('Narnia', {lang: 'en'})
+            await getWeather({city: 'Narnia', lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('messages.error')
@@ -69,7 +69,11 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
 
-        const weatherResults = await getWeatherByCoordinates(47.9291607, 20.3213702, {lang: 'en'})
+        const weatherResults = await getWeather({
+            lat: 47.9291607,
+            lon: 20.3213702,
+            lang: 'en'
+        })
 
         expect(weatherResults.main.temp).toEqual(24.06)
         expect(weatherResults.main.feels_like).toEqual(24.32)
@@ -87,7 +91,11 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
         try {
-            await getWeatherByCoordinates(47.9291607, 20.3213702, {lang: 'en'})
+            await getWeather({
+                lat: 47.9291607,
+                lon: 20.3213702,
+                lang: 'en'
+            })
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('messages.error')
@@ -106,7 +114,7 @@ describe('Fetches weather data from OpenWeatherMaps API', () => {
             })
         );
         try {
-            await getWeatherByCoordinates(-47888, 0, {lang: 'en'})
+            await getWeather({lat: -47888, lon: 0, lang: 'en'})
         } catch (e) {
             expect(e instanceof Error).toBe(true)
             expect(e.message).toBe('messages.error')

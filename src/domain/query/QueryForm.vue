@@ -54,25 +54,24 @@ export default {
     }
   },
   computed: {
-    valid: function () {
+    valid() {
       return this.city
     }
   },
   mounted() {
+    const coords = getRandomCoordinates()
+
     this.$bubble('update-weather', {
-      coords: getRandomCoordinates(),
-      options: {
-        lang: this.$i18n.locale
-      }
+      lat: coords.lat,
+      lon: coords.lon,
+      lang: this.$i18n.locale
     })
   },
   methods: {
     submitHandler() {
       this.$bubble('update-weather', {
-        city: this.city,
-        options: {
-          lang: this.$i18n.locale
-        }
+        q: this.city,
+        lang: this.$i18n.locale
       })
     }
   }
