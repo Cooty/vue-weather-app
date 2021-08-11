@@ -33,6 +33,13 @@ const mocks = {
     }
 }
 
+jest.mock('../../infrastructure/environment', () => {
+    return {
+        API_KEY: '1234abc',
+        MODE: 'prod'
+    }
+})
+
 describe('A component for displaying weather data', () => {
     it('renders the weather data', () => {
         const { getByText, container } = render(Display, {

@@ -7,7 +7,6 @@ export const setToLoadingState = (store) => {
     store.setIsLoading(true)
     store.setErrorMessage('')
     store.setIsError(false)
-    store.setIsRightSectionOpened(false)
 }
 
 export const setCityData = (weatherData, city, store) => {

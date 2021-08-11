@@ -37,6 +37,7 @@ export default {
         params.q = store.state.city
       }
       params.lang = value
+      params.units = store.state.units
 
       this.$bubble('update-weather', params)
     }

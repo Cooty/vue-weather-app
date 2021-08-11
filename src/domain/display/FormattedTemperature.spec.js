@@ -1,6 +1,13 @@
 import { render } from '@testing-library/vue'
 import FormattedTemperature from './FormattedTemperature.vue'
 
+jest.mock('../../infrastructure/environment', () => {
+    return {
+        API_KEY: '1234abc',
+        MODE: 'prod'
+    }
+})
+
 describe('A component for displaying formatted temperatures', () => {
     it('renders the number passed in without decimals and appends the unit', () => {
         const tempInput = 20.06
@@ -24,5 +31,22 @@ describe('A component for displaying formatted temperatures', () => {
         });
 
         expect(getByText('20°C')).toHaveClass('text-nowrap')
+    })
+
+    it('should switch to Fahrenheits when imperial units are set globally', () => {
+        const tempInput = 20.06
+        const { getByText } = render(FormattedTemperature, {
+            props: {
+                temp: tempInput
+            },
+            data: function() {
+                return {
+                    appState: {
+                        units: 'imperial'
+                    }
+                }
+            }
+        });
+        expect(getByText('20°F')).toBeVisible()
     })
 })

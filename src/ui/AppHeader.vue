@@ -11,19 +11,14 @@
         class="w-100 no-gutters"
       >
         <b-col
-          :cols="10"
-          :sm="9"
-          :md="8"
-          :lg="6"
+          class="flex-1"
+          cols="auto"
         >
           <slot name="left" />
         </b-col>
         <b-col
-          class="d-flex justify-content-end position-relative"
-          :cols="2"
-          :sm="3"
-          :md="4"
-          :lg="6"
+          class="d-flex justify-content-end position-relative pl-5"
+          cols="auto"
         >
           <button
             class="right-slot-toggler-lt-md d-md-none h4 mb-0 text-secondary"
@@ -83,6 +78,10 @@ export default {
 </script>
 
 <style scoped>
+.flex-1 {
+  flex: 1;
+}
+
 .right-slot-toggler-lt-md {
   border: 0;
   padding: 0;

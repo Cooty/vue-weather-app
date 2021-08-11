@@ -9,6 +9,8 @@ export default {
         cityPlaceholder: 'Type your city',
         submit: 'Check the weather!',
         loading: 'Loading...',
-        error: 'We couldn\'t get the weather data for that location'
+        error: 'We couldn\'t get the weather data for that location',
+        metric: 'Metric',
+        imperial: 'Imperial'
     }
 }

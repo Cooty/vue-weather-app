@@ -10,6 +10,7 @@ const store = {
         isError: false,
         errorMessage: '',
         isRightSectionOpened: false,
+        units: 'metric'
     },
     setWeatherData(newValue) {
         if(this.debug) console.log('setWeatherDataAction triggered with', newValue)
@@ -38,7 +39,11 @@ const store = {
     setIsRightSectionOpened(newValue) {
         if(this.debug) console.log('setIsRightSectionOpened triggered with', newValue)
         this.state.isRightSectionOpened = newValue
-    }
+    },
+    setUnits(newValue) {
+        if(this.debug) console.log('setUnits triggered with', newValue)
+        this.state.setUnits = newValue
+    },
 }
 
 Object.freeze(store)
