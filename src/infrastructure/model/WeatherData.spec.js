@@ -1,4 +1,4 @@
-import WeatherData from './WeatherData';
+import WeatherData from './WeatherData'
 
 describe('An object to store weather data', () => {
     it('can save data in it and we can retrieve that later', () => {

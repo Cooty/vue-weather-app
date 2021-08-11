@@ -1,6 +1,6 @@
-import WeatherData from '../model/WeatherData';
-import {makeWeatherData} from './weather-data';
-import weatherSuccess from '../api/mocks/weather-success';
+import WeatherData from '../model/WeatherData'
+import {makeWeatherData} from './weather-data'
+import weatherSuccess from '../api/mocks/weather-success'
 
 describe('A factory for the WeatherData model', () => {
     it('throws an error if insufficient data is passed', () => {

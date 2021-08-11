@@ -5,4 +5,4 @@ const langCodes = Object.freeze({
     HU: 'hu',
 })
 
-export default langCodes;
+export default langCodes
