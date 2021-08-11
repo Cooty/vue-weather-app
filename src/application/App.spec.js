@@ -1,8 +1,8 @@
 import {render} from '@testing-library/vue'
 import App from './App.vue'
-import successResponse from '../infrastructure/api/mocks/weather-success';
-import WeatherData from '../infrastructure/model/WeatherData';
-import store from '../infrastructure/store';
+import successResponse from '../infrastructure/api/mocks/weather-success'
+import WeatherData from '../infrastructure/model/WeatherData'
+import store from '../infrastructure/store'
 
 jest.mock('../infrastructure/environment', () => {
     return {
