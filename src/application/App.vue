@@ -49,16 +49,18 @@ import AppMain from '../ui/AppMain.vue'
 import AppHeader from '../ui/AppHeader.vue'
 import AppContent from '../ui/AppContent.vue'
 import {BSpinner, BAlert} from 'bootstrap-vue'
-import LanguageChanger from '../infrastructure/i18n/LanguageChanger.vue';
-import {getWeatherByCity, getWeatherByCoordinates} from '../infrastructure/api/api';
-import {makeWeatherData} from '../infrastructure/factory/weather-data';
+import LanguageChanger from '../infrastructure/i18n/LanguageChanger.vue'
+import {getWeather} from '../infrastructure/api/api'
+import {makeWeatherData} from '../infrastructure/factory/weather-data'
 import {
   errorHandler,
   setCityData,
   setCoordsData,
   setToLoadingState
-} from '../infrastructure/data-update';
-import cache from '../infrastructure/cache';
+} from '../infrastructure/data-update'
+import cache from '../infrastructure/cache'
+import serialize from '../utils/serialize'
+import Coords from '../infrastructure/model/Coords'
 
 export default {
   name: 'App',
@@ -79,23 +81,15 @@ export default {
     }
   },
   methods: {
-    onUpdateWeatherHandler: async (event) => {
+    onUpdateWeatherHandler: async (params) => {
       setToLoadingState(store)
-      let weatherData;
       try {
-        const cacheKeyLocationPrefix = event.coords ?
-          '' + event.coords.lat + event.coords.lon
-          :
-          event.city
-        const cacheKey = `${cacheKeyLocationPrefix}${event.options.lang}`
+        let weatherData;
+        const cacheKey = serialize(params)
         const cachedWeatherData = cache.getFromCache(cacheKey)
 
         if(!cachedWeatherData) {
-          const weatherApiResponse = event.coords ? await getWeatherByCoordinates(
-            event.coords.lat,
-            event.coords.lon,
-            event.options
-          ) : await getWeatherByCity(event.city, event.options)
+          const weatherApiResponse = await getWeather(params)
 
           weatherData = makeWeatherData(weatherApiResponse)
           cache.saveToCache(cacheKey, weatherData)
@@ -103,10 +97,14 @@ export default {
           weatherData = cachedWeatherData
         }
 
-        if(event.coords) {
-          setCoordsData(weatherData, event.coords, store)
+        if(params.q) {
+          setCityData(weatherData, params.q, store)
         } else {
-          setCityData(weatherData, event.city, store)
+          setCoordsData(
+            weatherData,
+            new Coords(params.lat, params.lon),
+            store
+          )
         }
       } catch(e) {
         errorHandler(e, store)
