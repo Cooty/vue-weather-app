@@ -5,7 +5,14 @@
         <query-form />
       </template>
       <template #right>
-        <language-changer />
+        <ul class="mb-0 list-unstyled d-md-flex w-100">
+          <li class="mb-3 mr-md-3 mb-md-0">
+            <unit-switcher />
+          </li>
+          <li>
+            <language-changer />
+          </li>
+        </ul>
       </template>
     </app-header>
 
@@ -61,6 +68,7 @@ import {
 import cache from '../infrastructure/cache'
 import serialize from '../utils/serialize'
 import Coords from '../infrastructure/model/Coords'
+import UnitSwitcher from '../domain/units/UnitSwitcher.vue'
 
 export default {
   name: 'App',
@@ -73,7 +81,8 @@ export default {
     LanguageChanger,
     AppHeader,
     AppMain,
-    AppContent
+    AppContent,
+    UnitSwitcher
   },
   data() {
     return {
@@ -106,6 +115,8 @@ export default {
             store
           )
         }
+
+        store.setUnits(params.units)
       } catch(e) {
         errorHandler(e, store)
       } finally {

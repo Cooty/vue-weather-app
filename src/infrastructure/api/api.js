@@ -2,11 +2,10 @@ import { API_KEY } from '../environment'
 import serialize from '../../utils/serialize'
 
 const key = API_KEY
-const preferredUnits = 'metric'
 const url = 'https://api.openweathermap.org/data'
 const version = 2.5
 const weatherEndpoint = `${url}/${version}/weather`
-const fixedParams = `&appid=${key}&units=${preferredUnits}`
+const fixedParams = `&appid=${key}`
 
 const getApiResponse = async (url) => {
     const response = await fetch(url)

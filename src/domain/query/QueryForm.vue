@@ -64,14 +64,16 @@ export default {
     this.$bubble('update-weather', {
       lat: coords.lat,
       lon: coords.lon,
-      lang: this.$i18n.locale
+      lang: this.$i18n.locale,
+      units: this.appState.units
     })
   },
   methods: {
     submitHandler() {
       this.$bubble('update-weather', {
         q: this.city,
-        lang: this.$i18n.locale
+        lang: this.$i18n.locale,
+        units: this.appState.units
       })
     }
   }
@@ -89,5 +91,4 @@ export default {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 </style>
