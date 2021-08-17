@@ -1,11 +1,17 @@
 <template>
-  <app-main @update-weather="onUpdateWeatherHandler">
+  <app-main
+    :theme="appState.theme"
+    @update-weather="onUpdateWeatherHandler"
+  >
     <app-header>
       <template #left>
         <query-form />
       </template>
       <template #right>
-        <ul class="mb-0 list-unstyled d-md-flex w-100">
+        <ul class="mb-0 list-unstyled d-md-flex w-100 align-items-center">
+          <li class="mb-3 mr-md-3 mb-md-0">
+            <theme-switcher />
+          </li>
           <li class="mb-3 mr-md-3 mb-md-0">
             <unit-switcher />
           </li>
@@ -69,6 +75,7 @@ import cache from '../infrastructure/cache'
 import serialize from '../utils/serialize'
 import Coords from '../infrastructure/model/Coords'
 import UnitSwitcher from '../domain/units/UnitSwitcher.vue'
+import ThemeSwitcher from '../domain/theme/ThemeSwitcher.vue';
 
 export default {
   name: 'App',
@@ -82,7 +89,8 @@ export default {
     AppHeader,
     AppMain,
     AppContent,
-    UnitSwitcher
+    UnitSwitcher,
+    ThemeSwitcher
   },
   data() {
     return {

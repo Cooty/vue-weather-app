@@ -81,6 +81,5 @@ The app is currently deployed to [GitHub Pages](https://pages.github.com/), usin
 ## ✅ TODOs and further ideas
 
 - Dockerize the application for both dev-environment and production
-- Add dynamic icons to temperature (based on degrees and the description)
-- Add unit switcher, so the user can select between metric and imperial units, since the API supports this
+- Add dynamic icons to temperature (based on degrees and the description). See [icon codes](https://openweathermap.org/weather-conditions).
 - Add an interactive map that displays both the City / Country or the initial random location

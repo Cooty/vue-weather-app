@@ -2,7 +2,7 @@
   <b-navbar
     :sticky="true"
     type="light"
-    variant="light"
+    :variant="isLightTheme ? 'light' : 'secondary'"
     class="shadow-sm"
   >
     <b-container fluid="lg">
@@ -22,6 +22,7 @@
         >
           <button
             class="right-slot-toggler-lt-md d-md-none h4 mb-0 text-secondary"
+            :class="isLightTheme ? 'text-secondary' : 'text-light'"
             @click="toggle"
           >
             <template v-if="appState.isRightSectionOpened">
@@ -33,7 +34,11 @@
           </button>
           <div
             class="right-slot p-2 p-md-0 rounded d-md-flex"
-            :class="{'opened': appState.isRightSectionOpened}"
+            :class="{
+              'opened': appState.isRightSectionOpened,
+              'bg-white': isLightTheme,
+              'bg-secondary': !isLightTheme,
+            }"
           >
             <slot name="right" />
           </div>
@@ -69,6 +74,11 @@ export default {
       appState: store.state
     }
   },
+  computed: {
+    isLightTheme() {
+      return this.appState.theme === 'light'
+    }
+  },
   methods: {
     toggle() {
       store.setIsRightSectionOpened(!this.appState.isRightSectionOpened)
@@ -78,6 +88,7 @@ export default {
 </script>
 
 <style scoped>
+
 .flex-1 {
   flex: 1;
 }
@@ -92,8 +103,7 @@ export default {
 .right-slot {
   display: none;
   position: absolute;
-  top: calc(100% + 0.5rem);
-  background: var(--white);
+  top: calc(100% + 1rem);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   min-width: 180px;
 }
@@ -101,6 +111,7 @@ export default {
 @media screen and (max-width: 767px) {
   .right-slot.opened {
     display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.125)
   }
 }
 

@@ -1,5 +1,8 @@
 <template>
-  <p :class="{'font-weight-bold': bold, 'text-muted': muted, 'mb-0': noBottomMargin}">
+  <p
+    class="text-row"
+    :class="{'font-weight-bold': bold, 'text-muted': muted, 'mb-0': noBottomMargin}"
+  >
     <slot />
   </p>
 </template>
@@ -23,3 +26,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .theme-dark .text-row.text-muted {
+    color: var(--dark) !important;
+  }
+</style>
