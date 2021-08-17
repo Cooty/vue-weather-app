@@ -2,6 +2,7 @@
   <b-card
     tag="article"
     class="shadow"
+    :class="appState.theme === 'light' ? '' : 'bg-secondary'"
   >
     <text-row :bold="true">
       <template v-if="city">
@@ -16,7 +17,7 @@
         <formatted-temperature :temp="weatherData.temp" />
       </h1>
       <div>
-        <b-badge variant="info">
+        <b-badge :variant="appState.theme === 'light' ? 'info' : 'warning'">
           {{ weatherData.description }}
         </b-badge>
       </div>
@@ -44,6 +45,7 @@ import FormattedTemperature from './FormattedTemperature.vue'
 import {BCard, BBadge} from 'bootstrap-vue'
 import WeatherData from '../../infrastructure/model/WeatherData'
 import Coords from '../../infrastructure/model/Coords'
+import store from '../../infrastructure/store';
 
 export default {
   name: 'Display',
@@ -66,6 +68,11 @@ export default {
     city: {
       type: String,
       default: ''
+    }
+  },
+  data() {
+    return {
+      appState: store.state
     }
   }
 }

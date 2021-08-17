@@ -10,7 +10,8 @@ const store = {
         isError: false,
         errorMessage: '',
         isRightSectionOpened: false,
-        units: 'metric'
+        units: 'metric',
+        theme: 'light'
     },
     setWeatherData(newValue) {
         if(this.debug) console.log('setWeatherDataAction triggered with', newValue)
@@ -42,8 +43,12 @@ const store = {
     },
     setUnits(newValue) {
         if(this.debug) console.log('setUnits triggered with', newValue)
-        this.state.setUnits = newValue
+        this.state.units = newValue
     },
+    setTheme(newValue) {
+        if(this.debug) console.log('setUnits triggered with', newValue)
+        this.state.theme = newValue
+    }
 }
 
 Object.freeze(store)

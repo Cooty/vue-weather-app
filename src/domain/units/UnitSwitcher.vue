@@ -1,20 +1,22 @@
 <template>
-  <b-form-radio-group
-    id="unit-switcher"
-    v-model="appState.units"
-    name="unit-switcher-buttons"
-    button-variant="outline-primary"
-    buttons
-    class="text-nowrap"
-    @change="changeHandler"
-  >
-    <b-form-radio value="metric">
-      {{ $t('messages.metric') }}: °C
-    </b-form-radio>
-    <b-form-radio value="imperial">
-      {{ $t('messages.imperial') }}: °F
-    </b-form-radio>
-  </b-form-radio-group>
+  <div class="bg-white rounded">
+    <b-form-radio-group
+      id="unit-switcher"
+      v-model="appState.units"
+      name="unit-switcher-buttons"
+      button-variant="outline-primary"
+      buttons
+      class="text-nowrap"
+      @change="changeHandler"
+    >
+      <b-form-radio value="metric">
+        {{ $t('messages.metric') }}: °C
+      </b-form-radio>
+      <b-form-radio value="imperial">
+        {{ $t('messages.imperial') }}: °F
+      </b-form-radio>
+    </b-form-radio-group>
+  </div>
 </template>
 
 <script>
