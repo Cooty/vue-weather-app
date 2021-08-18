@@ -11,6 +11,7 @@ export default {
         loading: 'Loading...',
         error: 'We couldn\'t get the weather data for that location',
         metric: 'Metric',
-        imperial: 'Imperial'
+        imperial: 'Imperial',
+        switchTheme: 'switch theme'
     }
 }
