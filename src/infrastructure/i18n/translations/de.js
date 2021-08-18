@@ -11,6 +11,7 @@ export default {
         loading: 'Wird geladen...',
         error: 'Wir konnten die Wetterdaten für diesen Ort nicht abrufen',
         metric: 'metrisch',
-        imperial: 'angloamerikanische'
+        imperial: 'angloamerikanische',
+        switchTheme: 'Themen wechseln'
     }
 }

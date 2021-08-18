@@ -11,6 +11,7 @@ export default {
         loading: 'Betöltés...',
         error: 'Sajnos erről a helyről nem tudjuk lekérni az időjárást',
         metric: 'Metrikus',
-        imperial: 'Angolszász'
+        imperial: 'Angolszász',
+        switchTheme: 'téma váltása'
     }
 }

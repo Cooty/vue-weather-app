@@ -4,6 +4,7 @@
     name="theme-switcher"
     switch
     size="lg"
+    :aria-label="$t('messages.switchTheme')"
     @change="changeHandler"
   >
     <template v-if="appState.theme === 'dark'">
@@ -38,9 +39,7 @@ export default {
   },
   methods: {
     changeHandler(value) {
-      const theme = value ? 'dark' : 'light'
-
-      store.setTheme(theme)
+      store.setTheme(value ? 'dark' : 'light')
     }
   }
 }
