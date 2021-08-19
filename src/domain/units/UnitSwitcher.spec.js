@@ -40,7 +40,7 @@ describe('Renders a switch to toggle units', () => {
         await fireEvent.click(fahrenheit)
         expect(mockBubble).toHaveBeenCalledWith(
             'update-weather',
-            {lang: 'en', q: '', units: 'imperial'}
+            {lang: 'en', lat: null, lon: null, q: '', units: 'imperial'}
             )
     })
 });

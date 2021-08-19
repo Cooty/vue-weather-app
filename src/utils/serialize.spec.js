@@ -18,4 +18,18 @@ describe('Helper function to turn an object into a query string', () => {
             'hu=%C3%81rv%C3%ADzt%C5%B1r%C5%91+t%C3%BCk%C3%B6rf%C3%BAr%C3%B3g%C3%A9p&bg=%D0%A0%D0%BE%D0%B4%D0%BD%D0%BE%D1%82%D0%BE+%D0%A7%D0%B5%D1%80%D0%BD%D0%BE%D0%BC%D0%BE%D1%80%D0%B8%D0%B5+%D1%81%D0%B5'
         )
     })
+
+    it('will not include keys that have a value of undefined of null', () => {
+        const obj = {foo: undefined, baz: null, fizz: 'bazz'}
+        const queryString = serialize(obj)
+
+        expect(queryString).toEqual('fizz=bazz')
+    })
+
+    it('will include keys that have a value of false', () => {
+        const obj = {foo: true, baz: false, fizz: 'false'}
+        const queryString = serialize(obj)
+
+        expect(queryString).toEqual('foo=true&baz=false&fizz=false')
+    })
 })

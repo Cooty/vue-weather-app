@@ -28,16 +28,13 @@ export default {
   },
   methods: {
     changeHandler(value) {
-      const params = {}
-
-      if(store.state.coords) {
-        params.lat = store.state.coords.lat
-        params.lon = store.state.coords.lon
-      } else {
-        params.q = store.state.city
+      const params = {
+        lat: store.state.coords ? store.state.coords.lat : null,
+        lon: store.state.coords ? store.state.coords.lon : null,
+        q: !store.state.coords ? store.state.city : null,
+        lang: value,
+        units: store.state.units
       }
-      params.lang = value
-      params.units = store.state.units
 
       this.$bubble('update-weather', params)
     }
