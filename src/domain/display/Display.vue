@@ -17,7 +17,7 @@
         <formatted-temperature :temp="weatherData.temp" />
       </h1>
       <div>
-        <b-badge :variant="appState.theme === 'light' ? 'info' : 'warning'">
+        <b-badge variant="info">
           {{ weatherData.description }}
         </b-badge>
       </div>
