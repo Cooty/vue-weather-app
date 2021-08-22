@@ -13,7 +13,7 @@
       id="input-city"
       v-model="city"
       name="city"
-      class="query-form-city"
+      class="query-form-input"
       :placeholder="$t('messages.cityPlaceholder')"
       required
     />
@@ -81,10 +81,11 @@ export default {
 </script>
 
 <style scoped>
-.query-form-city {
+.query-form-input {
   flex: 1;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  border-right-width: 0;
 }
 
 .query-form-submit {

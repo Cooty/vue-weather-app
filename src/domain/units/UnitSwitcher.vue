@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-white rounded">
+  <div
+    class="rounded"
+    :class="appState.theme === 'dark' ? 'bg-dark-form-control-border' : 'bg-white'"
+  >
     <b-form-radio-group
       id="unit-switcher"
       v-model="appState.units"

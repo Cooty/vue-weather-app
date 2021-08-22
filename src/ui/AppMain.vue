@@ -1,6 +1,6 @@
 <template>
   <main
-    class="app-main position-relative d-flex flex-column h-100"
+    class="position-relative d-flex flex-column h-100"
     :class="`theme-${theme}`"
   >
     <slot />
@@ -18,15 +18,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .app-main.theme-light {
-    background: var(--white);
-    color: var(--dark);
-  }
-
-  .app-main.theme-dark {
-    background: var(--dark);
-    color: var(--light);
-  }
-</style>
