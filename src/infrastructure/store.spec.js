@@ -59,4 +59,13 @@ describe('an object for storing data that\'s globally accessible', () => {
         store.setIsRightSectionOpened(true)
         expect(store.state.isRightSectionOpened).toBe(true)
     })
+
+    it('can set unit types that will be passed to the API', () => {
+        // the string values are defined by the API
+        // see: https://openweathermap.org/current#data
+        expect(store.state.units).toBe('metric')
+
+        store.setUnits('imperial')
+        expect(store.state.units).toBe('imperial')
+    })
 })
