@@ -1,5 +1,7 @@
 import {fireEvent, render} from '@testing-library/vue'
 import UnitSwitcher from './UnitSwitcher.vue'
+import store from '../../infrastructure/store'
+import Coords from '../../infrastructure/model/Coords';
 
 jest.mock('../../infrastructure/environment', () => {
     return {
@@ -35,12 +37,16 @@ describe('Renders a switch to toggle units', () => {
     })
 
     it('triggers the event for updating the application state', async () => {
+        const dummyLat = 42.5061
+        const dummyLon = 27.4678
+        const dummyCoords = new Coords(dummyLat, dummyLon)
+        store.setCoords(dummyCoords)
         const {getByText} = render(UnitSwitcher, {mocks})
         const fahrenheit = getByText(`${imperialEn}: °F`)
         await fireEvent.click(fahrenheit)
         expect(mockBubble).toHaveBeenCalledWith(
             'update-weather',
-            {lang: 'en', lat: null, lon: null, q: '', units: 'imperial'}
+            {lang: 'en', lat: dummyLat, lon: dummyLon, q: '', units: 'imperial'}
             )
     })
 });

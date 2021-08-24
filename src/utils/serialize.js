@@ -1,6 +1,6 @@
 const serialize = (obj) => {
     const keysThatHaveValidValues = Object.keys(obj).filter(
-        key => obj.hasOwnProperty(key) && obj[key] !== null && obj[key] !== undefined
+        key => obj.hasOwnProperty(key) && obj[key] !== null && obj[key] !== undefined && obj[key] !== ''
     )
 
     const objWithValidValues = {}

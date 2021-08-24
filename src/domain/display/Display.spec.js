@@ -23,7 +23,6 @@ const dummyTranslations = {
     'messages.loading': 'Loading...',
     'messages.humidity': 'Humidity',
     'messages.pressure': 'Pressure',
-    'messages.weatherForCoordinates': `The weather for a random coordinate (latitude: ${dummyLat}, longitude: ${dummyLon}) is:`,
     'messages.weatherForCity': `The weather for ${dummyCity} is:`
 }
 const mocks = {
@@ -45,7 +44,8 @@ describe('A component for displaying weather data', () => {
         const { getByText, container } = render(Display, {
             props: {
                 weatherData: dummyWeatherData,
-                city: dummyCity
+                city: dummyCity,
+                coords: dummyCoords
             },
             mocks
         })
@@ -57,24 +57,12 @@ describe('A component for displaying weather data', () => {
         expect(container).toHaveTextContent(dummyPressure.toString())
     })
 
-    it('displays coordinates when they are passed in', () => {
+    it('displays the queried place when passed', () => {
         const { container } = render(Display, {
             props: {
                 weatherData: dummyWeatherData,
+                city: dummyCity,
                 coords: dummyCoords
-            },
-            mocks
-        })
-
-        expect(container).toHaveTextContent(dummyCoords.lat.toString())
-        expect(container).toHaveTextContent(dummyCoords.lon.toString())
-    })
-
-    it('displays city and country code when they are passed', () => {
-        const { container } = render(Display, {
-            props: {
-                weatherData: dummyWeatherData,
-                city: dummyCity
             },
             mocks
         })

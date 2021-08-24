@@ -1,7 +1,6 @@
 export default {
     messages: {
         weatherForCity: 'Aktuális időjárás, {city}:',
-        weatherForCoordinates: 'Időjárás egy véletlenszerű ponton (szélesség: {lat}, hosszúság: {lon}):',
         feelsLike: 'érzésre',
         humidity: 'Páratartalom',
         pressure: 'Nyomás',
