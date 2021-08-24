@@ -8,7 +8,15 @@
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import Coords from '../../infrastructure/model/Coords'
-import store from '../../infrastructure/store';
+import store from '../../infrastructure/store'
+
+// We have to manually copy all the images that leaflet uses in it's
+// NPM package (node_modules/leaflet/dist/images/) to our public/ folder
+// and reference them from there. Since node_modules/ is not deployed
+// the images will be broken on production unless we add them to our code.
+// There's a better way proposed here: https://github.com/PaulLeCam/react-leaflet/issues/453#issuecomment-410450387
+// but that doesn't seem to work. So it's gonna be like this for now...
+L.Icon.Default.imagePath = 'images/leaflet/'
 
 export default {
   name: "AppMap",
