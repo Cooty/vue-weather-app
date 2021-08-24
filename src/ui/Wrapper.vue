@@ -3,10 +3,7 @@
     <b-row class="justify-content-center align-items-center">
       <b-col
         cols="12"
-        sm="10"
-        md="8"
-        lg="6"
-        xl="5"
+        xl="9"
       >
         <slot />
       </b-col>

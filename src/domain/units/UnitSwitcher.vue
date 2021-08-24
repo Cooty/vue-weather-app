@@ -40,9 +40,9 @@ export default {
   methods: {
     changeHandler(value) {
       const params = {
-        lat: store.state.coords ? store.state.coords.lat : null,
-        lon: store.state.coords ? store.state.coords.lon : null,
-        q: !store.state.coords ? store.state.city : null,
+        lat: store.state.coords.lat,
+        lon: store.state.coords.lon,
+        q: store.state.city,
         lang: this.$i18n.locale,
         units: value
       }

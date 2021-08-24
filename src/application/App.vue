@@ -5,7 +5,7 @@
   >
     <app-header>
       <template #left>
-        <query-form />
+        <query-form :city="appState.city" />
       </template>
       <template #right>
         <ul class="mb-0 list-unstyled d-md-flex w-100 align-items-center">
@@ -101,25 +101,32 @@ export default {
     onUpdateWeatherHandler: async (params) => {
       setToLoadingState(store)
       try {
-        let weatherData;
         const cacheKey = serialize(params)
-        const cachedWeatherData = cache.getFromCache(cacheKey)
+        const cachedResponse = cache.getFromCache(cacheKey)
+        let weatherApiResponse
 
-        if(!cachedWeatherData) {
-          const weatherApiResponse = await getWeather(params)
-
-          weatherData = makeWeatherData(weatherApiResponse)
-          cache.saveToCache(cacheKey, weatherData)
+        if(cachedResponse) {
+          weatherApiResponse = cachedResponse
         } else {
-          weatherData = cachedWeatherData
+          weatherApiResponse = await getWeather(params)
+
+          cache.saveToCache(cacheKey, weatherApiResponse)
         }
 
+        const weatherData = makeWeatherData(weatherApiResponse)
+        const coords = new Coords(weatherApiResponse.coord.lat, weatherApiResponse.coord.lon)
+
         if(params.q) {
-          setCityData(weatherData, params.q, store)
+          setCityData(
+            weatherData,
+            coords,
+            params.q,
+            store
+          )
         } else {
           setCoordsData(
             weatherData,
-            new Coords(params.lat, params.lon),
+            coords,
             store
           )
         }

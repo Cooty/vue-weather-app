@@ -48,7 +48,8 @@ describe('A set of functions to handle states that are coupled together', () => 
 
     it('can set weather data by city', async () => {
         const store = await getStore()
-        setCityData(mockWeatherData, 'Budapest', store)
+        const dummyCoords = new Coords(42.5061, 27.4678)
+        setCityData(mockWeatherData, dummyCoords,'Budapest', store)
         expect(store.state.weatherData.temp).toBe(20)
         expect(store.state.city).toBe('Budapest')
     })

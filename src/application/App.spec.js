@@ -3,6 +3,7 @@ import App from './App.vue'
 import successResponse from '../infrastructure/api/mocks/weather-success'
 import WeatherData from '../infrastructure/model/WeatherData'
 import store from '../infrastructure/store'
+import Coords from '../infrastructure/model/Coords';
 
 jest.mock('../infrastructure/environment', () => {
     return {
@@ -67,6 +68,7 @@ describe('The main component for displaying the application', () => {
         const dummyFeelsLike = 35
         const dummyHumidity = 57
         const dummyPressure = 1200
+        const coords = new Coords(40.121212, -180.2233)
         const { getByText } = render(App, {
             data: () => ({
                 appState: {
@@ -77,7 +79,8 @@ describe('The main component for displaying the application', () => {
                         dummyHumidity,
                         dummyPressure
                     ),
-                    city: 'Budapest'
+                    city: 'Budapest',
+                    coords
                 }
             }),
             mocks

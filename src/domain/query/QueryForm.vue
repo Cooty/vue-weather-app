@@ -11,7 +11,7 @@
     </label>
     <b-form-input
       id="input-city"
-      v-model="city"
+      v-model="cityInput"
       name="city"
       class="query-form-input"
       :placeholder="$t('messages.cityPlaceholder')"
@@ -47,15 +47,28 @@ export default {
     BIconSearch,
     BButton,
   },
+  props: {
+    city: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
-      city: '',
+      cityInput: this.city,
       appState: store.state,
     }
   },
   computed: {
     valid() {
-      return this.city
+      return this.cityInput
+    }
+  },
+  watch: {
+    city: function(newVal, _) {
+      if(!newVal) {
+        this.cityInput = ''
+      }
     }
   },
   mounted() {
@@ -71,7 +84,7 @@ export default {
   methods: {
     submitHandler() {
       this.$bubble('update-weather', {
-        q: this.city,
+        q: this.cityInput,
         lang: this.$i18n.locale,
         units: this.appState.units
       })

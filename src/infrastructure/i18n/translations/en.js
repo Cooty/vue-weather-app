@@ -1,7 +1,6 @@
 export default {
     messages: {
         weatherForCity: 'The weather for {city} is:',
-        weatherForCoordinates: 'The weather for a random coordinate (latitude: {lat}, longitude: {lon}) is:',
         feelsLike: 'feels like',
         humidity: 'Humidity',
         pressure: 'Pressure',

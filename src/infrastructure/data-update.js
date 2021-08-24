@@ -9,13 +9,14 @@ export const setToLoadingState = (store) => {
     store.setIsError(false)
 }
 
-export const setCityData = (weatherData, city, store) => {
+export const setCityData = (weatherData, coords, city, store) => {
     store.setWeatherData(weatherData)
-    store.setCoords(null)
+    store.setCoords(coords)
     store.setCity(city)
 }
 
 export const setCoordsData = (weatherData, coords, store) => {
     store.setWeatherData(weatherData)
     store.setCoords(coords)
+    store.setCity('')
 }
