@@ -17,11 +17,11 @@
           <slot name="left" />
         </b-col>
         <b-col
-          class="d-flex justify-content-end pl-md-5"
+          class="d-flex justify-content-end pl-lg-5"
           cols="auto"
         >
           <div
-            class="right-slot p-2 p-md-0 d-flex"
+            class="right-slot p-2 p-lg-0 d-flex"
             :class="{
               'bg-light': isLightTheme,
               'bg-secondary': !isLightTheme,
@@ -79,7 +79,7 @@ export default {
   box-shadow: 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .right-slot {
     position: relative;
     bottom: auto;
