@@ -8,11 +8,11 @@
         <query-form :city="appState.city" />
       </template>
       <template #right>
-        <ul class="mb-0 list-unstyled d-md-flex w-100 align-items-center">
-          <li class="mb-3 mr-md-3 mb-md-0">
+        <ul class="mb-0 list-unstyled d-flex w-100 align-items-center justify-content-center">
+          <li class="mr-3">
             <theme-switcher />
           </li>
-          <li class="mb-3 mr-md-3 mb-md-0">
+          <li class="mr-3">
             <unit-switcher />
           </li>
           <li>

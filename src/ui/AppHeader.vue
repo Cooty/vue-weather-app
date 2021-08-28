@@ -17,26 +17,13 @@
           <slot name="left" />
         </b-col>
         <b-col
-          class="d-flex justify-content-end position-relative pl-5"
+          class="d-flex justify-content-end pl-md-5"
           cols="auto"
         >
-          <button
-            class="right-slot-toggler-lt-md d-md-none h4 mb-0 text-secondary"
-            :class="isLightTheme ? 'text-secondary' : 'text-light'"
-            @click="toggle"
-          >
-            <template v-if="appState.isRightSectionOpened">
-              <b-icon-x />
-            </template>
-            <template v-else>
-              <b-icon-gear />
-            </template>
-          </button>
           <div
-            class="right-slot p-2 p-md-0 rounded d-md-flex"
+            class="right-slot p-2 p-md-0 d-flex"
             :class="{
-              'opened': appState.isRightSectionOpened,
-              'bg-white': isLightTheme,
+              'bg-light': isLightTheme,
               'bg-secondary': !isLightTheme,
             }"
           >
@@ -53,9 +40,7 @@ import {
   BNavbar,
   BContainer,
   BRow,
-  BCol,
-  BIconGear,
-  BIconX
+  BCol
 } from 'bootstrap-vue'
 import store from '../infrastructure/store'
 
@@ -65,9 +50,7 @@ export default {
     BNavbar,
     BContainer,
     BRow,
-    BCol,
-    BIconGear,
-    BIconX
+    BCol
   },
   data() {
     return {
@@ -77,11 +60,6 @@ export default {
   computed: {
     isLightTheme() {
       return this.appState.theme === 'light'
-    }
-  },
-  methods: {
-    toggle() {
-      store.setIsRightSectionOpened(!this.appState.isRightSectionOpened)
     }
   }
 }
@@ -93,35 +71,21 @@ export default {
   flex: 1;
 }
 
-.right-slot-toggler-lt-md {
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  background: none;
-}
-
 .right-slot {
-  display: none;
-  position: absolute;
-  top: calc(100% + 1rem);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  min-width: 180px;
-}
-
-@media screen and (max-width: 767px) {
-  .right-slot.opened {
-    display: flex;
-    border: 1px solid rgba(0, 0, 0, 0.125)
-  }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 @media screen and (min-width: 768px) {
   .right-slot {
     position: relative;
-    top: auto;
-    background: none;
+    bottom: auto;
+    left: auto;
+    right: auto;
     box-shadow: none;
-    min-width: 0;
   }
 }
 

@@ -12,11 +12,17 @@
       class="text-nowrap"
       @change="changeHandler"
     >
-      <b-form-radio value="metric">
-        {{ $t('messages.metric') }}: °C
+      <b-form-radio
+        value="metric"
+        data-testid="metric"
+      >
+        <span class="d-none d-md-inline">{{ $t('messages.metric') }}: </span>°C
       </b-form-radio>
-      <b-form-radio value="imperial">
-        {{ $t('messages.imperial') }}: °F
+      <b-form-radio
+        value="imperial"
+        data-testid="imperial"
+      >
+        <span class="d-none d-md-inline">{{ $t('messages.imperial') }}: </span>°F
       </b-form-radio>
     </b-form-radio-group>
   </div>
