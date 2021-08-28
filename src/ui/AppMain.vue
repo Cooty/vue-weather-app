@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1023px) {
   .app-main {
     padding-bottom: var(--bottom-bar-height);
   }
