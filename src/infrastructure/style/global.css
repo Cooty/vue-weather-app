@@ -15,3 +15,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* global variables */
+:root {
+  --bottom-bar-height: 3.375rem
+}

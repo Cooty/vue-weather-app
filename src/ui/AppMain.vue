@@ -1,6 +1,6 @@
 <template>
   <main
-    class="position-relative d-flex flex-column h-100"
+    class="app-main d-flex flex-column h-100"
     :class="`theme-${theme}`"
   >
     <slot />
@@ -18,3 +18,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@media screen and (max-width: 767px) {
+  .app-main {
+    padding-bottom: var(--bottom-bar-height);
+  }
+}
+</style>
