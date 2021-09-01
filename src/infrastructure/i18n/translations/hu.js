@@ -11,6 +11,7 @@ export default {
         error: 'Sajnos erről a helyről nem tudjuk lekérni az időjárást',
         metric: 'Metrikus',
         imperial: 'Angolszász',
-        switchTheme: 'téma váltása'
+        switchTheme: 'téma váltása',
+        locationTooltip: 'Időjárás a tartózkodási helyemen'
     }
 }

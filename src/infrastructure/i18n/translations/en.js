@@ -11,6 +11,7 @@ export default {
         error: 'We couldn\'t get the weather data for that location',
         metric: 'Metric',
         imperial: 'Imperial',
-        switchTheme: 'switch theme'
+        switchTheme: 'switch theme',
+        locationTooltip: 'Weather for my location'
     }
 }
