@@ -11,6 +11,7 @@ export default {
         error: 'Wir konnten die Wetterdaten für diesen Ort nicht abrufen',
         metric: 'metrisch',
         imperial: 'amerikanisch',
-        switchTheme: 'Themen wechseln'
+        switchTheme: 'Themen wechseln',
+        locationTooltip: 'Wetter für meinen Standort'
     }
 }

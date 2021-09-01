@@ -1,6 +1,7 @@
 <template>
   <b-form
     inline
+    class="position-relative"
     @submit.prevent="submitHandler"
   >
     <label
@@ -26,6 +27,9 @@
     >
       <b-icon-search />
     </b-button>
+    <div class="location-finder-container">
+      <location-finder />
+    </div>
   </b-form>
 </template>
 
@@ -38,6 +42,7 @@ import {
 } from 'bootstrap-vue'
 import getRandomCoordinates from '../../infrastructure/get-random-coordinates'
 import store from '../../infrastructure/store'
+import LocationFinder from './LocationFinder.vue'
 
 export default {
   name: 'QueryForm',
@@ -46,6 +51,7 @@ export default {
     BFormInput,
     BIconSearch,
     BButton,
+    LocationFinder
   },
   props: {
     city: {
@@ -104,5 +110,11 @@ export default {
 .query-form-submit {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.location-finder-container {
+  position: absolute;
+  z-index: 2;
+  right: 54px;
 }
 </style>
