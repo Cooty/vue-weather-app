@@ -8,12 +8,18 @@ const dummyDescription = 'cloudy'
 const dummyFeelsLike = 35
 const dummyHumidity = 57
 const dummyPressure = 1200
+const dummyWindSpeed = 10
+const dummyWindDeg = 335
+const dummyVisibility = 10000
 const dummyWeatherData = new WeatherData(
     dummyTemp,
     dummyDescription,
     dummyFeelsLike,
     dummyHumidity,
-    dummyPressure
+    dummyPressure,
+    dummyWindSpeed,
+    dummyWindDeg,
+    dummyVisibility
 )
 const dummyLat = 42.5061
 const dummyLon = 27.4678
@@ -27,6 +33,7 @@ const dummyTranslations = {
 }
 const mocks = {
     $t: (key) => dummyTranslations[key],
+    $n: (n) => n,
     $i18n: {
         locale: 'en'
     }

@@ -12,6 +12,8 @@ export default {
         metric: 'метричен',
         imperial: 'американски',
         switchTheme: 'превключване на тема',
-        locationTooltip: 'Времето за моето местоположение'
+        locationTooltip: 'Времето за моето местоположение',
+        windSpeed: 'скоростта на вятъра',
+        visibility: 'видимост'
     }
 }

@@ -12,6 +12,8 @@ export default {
         metric: 'Metrikus',
         imperial: 'Angolszász',
         switchTheme: 'téma váltása',
-        locationTooltip: 'Időjárás a tartózkodási helyemen'
+        locationTooltip: 'Időjárás a tartózkodási helyemen',
+        windSpeed: 'Szélsebesség',
+        visibility: 'Látótávolság'
     }
 }

@@ -32,11 +32,21 @@
         <text-row :muted="true">
           {{ $t('messages.humidity') }}: {{ weatherData.humidity }}%
         </text-row>
+        <text-row :muted="true">
+          {{ $t('messages.pressure') }}: {{ weatherData.pressure }}hPa
+        </text-row>
+        <text-row :muted="true">
+          {{ $t('messages.windSpeed') }}:
+          <formatted-wind-speed
+            :wind-speed="weatherData.windSpeed"
+            :wind-deg="weatherData.windDeg"
+          />
+        </text-row>
         <text-row
           :muted="true"
           :no-bottom-margin="true"
         >
-          {{ $t('messages.pressure') }}: {{ weatherData.pressure }}hPa
+          {{ $t('messages.visibility') }}: <formatted-visibility :visibility="weatherData.visibility" />
         </text-row>
       </b-col>
       <b-col
@@ -59,6 +69,8 @@ import WeatherData from '../../infrastructure/model/WeatherData'
 import Coords from '../../infrastructure/model/Coords'
 import store from '../../infrastructure/store'
 import AppMap from './AppMap.vue'
+import FormattedWindSpeed from './FormattedWindSpeed.vue'
+import FormattedVisibility from './FormattedVisibility.vue'
 
 export default {
   name: 'Display',
@@ -70,7 +82,9 @@ export default {
     FormattedTemperature,
     AppMap,
     BRow,
-    BCol
+    BCol,
+    FormattedWindSpeed,
+    FormattedVisibility
   },
   props: {
     weatherData: {

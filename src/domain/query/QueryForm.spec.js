@@ -18,6 +18,7 @@ const dummyTranslations = {
 }
 const mocks = {
     $t: (key) => dummyTranslations[key],
+    $n: (n) => n,
     $i18n: {
         locale: 'en'
     },

@@ -12,6 +12,8 @@ export default {
         metric: 'metrisch',
         imperial: 'amerikanisch',
         switchTheme: 'Themen wechseln',
-        locationTooltip: 'Wetter für meinen Standort'
+        locationTooltip: 'Wetter für meinen Standort',
+        windSpeed: 'Windgeschwindigkeit',
+        visibility: 'Sichtweite'
     }
 }
