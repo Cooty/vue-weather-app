@@ -12,6 +12,8 @@ export default {
         metric: 'Metric',
         imperial: 'Imperial',
         switchTheme: 'switch theme',
-        locationTooltip: 'Weather for my location'
+        locationTooltip: 'Weather for my location',
+        windSpeed: 'Wind speed',
+        visibility: 'Visibility'
     }
 }

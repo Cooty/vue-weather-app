@@ -26,6 +26,7 @@ const dummyTranslations = {
 }
 const mocks = {
     $t: (key) => dummyTranslations[key],
+    $n: (n) => n,
     $i18n: {
         locale: 'en'
     },
@@ -69,6 +70,9 @@ describe('The main component for displaying the application', () => {
         const dummyHumidity = 57
         const dummyPressure = 1200
         const coords = new Coords(40.121212, -180.2233)
+        const dummyWindSpeed = 10
+        const dummyWindDeg = 335
+        const dummyVisibility = 10000
         const { getByText } = render(App, {
             data: () => ({
                 appState: {
@@ -77,7 +81,10 @@ describe('The main component for displaying the application', () => {
                         dummyDescription,
                         dummyFeelsLike,
                         dummyHumidity,
-                        dummyPressure
+                        dummyPressure,
+                        dummyWindSpeed,
+                        dummyWindDeg,
+                        dummyVisibility
                     ),
                     city: 'Budapest',
                     coords

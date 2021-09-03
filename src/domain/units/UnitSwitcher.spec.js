@@ -22,6 +22,7 @@ const mockBubble = jest.fn(() => undefined).mockName('bubbles')
 
 const mocks = {
     $t: (key) => dummyTranslations[key],
+    $n: (n) => n,
     $i18n: {
         locale: 'en'
     },

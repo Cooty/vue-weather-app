@@ -1,6 +1,6 @@
 <template>
   <span class="text-nowrap">
-    {{ Math.floor(temp) }}{{ appState.units === 'metric' ? '°C' : '°F' }}
+    {{ Math.floor(temp) }}{{ unit }}
   </span>
 </template>
 
@@ -18,6 +18,11 @@ export default {
   data() {
     return {
       appState: store.state
+    }
+  },
+  computed: {
+    unit: function() {
+      return this.appState.units === 'metric' ? '°C' : '°F'
     }
   }
 }
