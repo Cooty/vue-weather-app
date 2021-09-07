@@ -18,7 +18,11 @@ const mockWeatherData = new WeatherData(
     'stuff',
     19,
     60,
-    1100
+    1100,
+    10,
+    335,
+    1000,
+    '02d'
 )
 
 // dynamically load the store since it's a singelton so we can modify it in each test-case independently

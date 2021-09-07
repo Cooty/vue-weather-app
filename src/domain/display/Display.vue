@@ -17,6 +17,7 @@
         </template>
         <div class="d-flex flex-nowrap justify-content-between">
           <h1 class="h2">
+            <weather-condition-icon :icon-code="weatherData.icon"/>
             <formatted-temperature :temp="weatherData.temp" />
           </h1>
           <div>
@@ -71,6 +72,7 @@ import store from '../../infrastructure/store'
 import AppMap from './AppMap.vue'
 import FormattedWindSpeed from './FormattedWindSpeed.vue'
 import FormattedVisibility from './FormattedVisibility.vue'
+import WeatherConditionIcon from './WeatherConditionIcon.vue';
 
 export default {
   name: 'Display',
@@ -84,7 +86,8 @@ export default {
     BRow,
     BCol,
     FormattedWindSpeed,
-    FormattedVisibility
+    FormattedVisibility,
+    WeatherConditionIcon
   },
   props: {
     weatherData: {

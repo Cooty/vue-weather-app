@@ -19,7 +19,8 @@ const dummyWeatherData = new WeatherData(
     dummyPressure,
     dummyWindSpeed,
     dummyWindDeg,
-    dummyVisibility
+    dummyVisibility,
+    '02d'
 )
 const dummyLat = 42.5061
 const dummyLon = 27.4678
