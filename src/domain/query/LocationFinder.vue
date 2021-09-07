@@ -43,6 +43,8 @@ export default {
         })
       } catch (e) {
         console.warn(e)
+      } finally {
+        e.target.blur()
       }
     }
   }
