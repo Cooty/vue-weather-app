@@ -14,7 +14,8 @@ export const makeWeatherData = (response) => {
         !wind ||
         !wind.speed ||
         !wind.deg ||
-        !visibility
+        !visibility ||
+        !weather[0].icon
     ) {
         throw new Error('Can\'t find all the necessary data in the API response')
     }
@@ -27,6 +28,7 @@ export const makeWeatherData = (response) => {
         main.pressure,
         wind.speed,
         wind.deg,
-        visibility
+        visibility,
+        weather[0].icon
     )
 }

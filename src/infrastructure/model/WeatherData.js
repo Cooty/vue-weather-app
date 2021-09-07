@@ -7,7 +7,8 @@ class WeatherData {
         pressure,
         windSpeed,
         windDeg,
-        visibility
+        visibility,
+        icon
     ) {
         this.temp = temp
         this.description = description
@@ -17,6 +18,7 @@ class WeatherData {
         this.windSpeed = windSpeed
         this.windDeg = windDeg
         this.visibility = visibility
+        this.icon = icon
     }
 
 }

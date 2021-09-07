@@ -84,7 +84,8 @@ describe('The main component for displaying the application', () => {
                         dummyPressure,
                         dummyWindSpeed,
                         dummyWindDeg,
-                        dummyVisibility
+                        dummyVisibility,
+                        '02d'
                     ),
                     city: 'Budapest',
                     coords
