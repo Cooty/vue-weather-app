@@ -1,7 +1,7 @@
 <template>
   <button
     v-if="isGeolocationSupported"
-    v-b-tooltip="$t('messages.locationTooltip')"
+    v-b-tooltip.hover="$t('messages.locationTooltip')"
     class="location-finder text-primary h5 mb-0"
     type="button"
     @click.prevent="clickHandler"
@@ -43,8 +43,6 @@ export default {
         })
       } catch (e) {
         console.warn(e)
-      } finally {
-        e.target.blur()
       }
     }
   }
