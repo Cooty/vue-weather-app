@@ -4,6 +4,38 @@ A simple client for [OpenWeatherMap](https://openweathermap.org/) API made with 
 
 ## 🔧 Usage
 
+### 🐋 In Docker
+
+The application has a dockerized, portable dev environment, to run the code on your machine all you need is to have [Docker](https://www.docker.com/) installed. Docker setup is mostly based on [this article](https://mherman.org/blog/dockerizing-a-react-app/).
+
+run
+
+```
+make build-dev
+```
+
+to create the development image. This command should create an image called `vue-weather-app:dev` on your system.
+
+now you can run it with
+
+```
+make run-dev
+```
+
+The app should be available on `http://localhost:3000/` in your browser. Code changes should reflect immediately thanks to the Hot Module Reload (HMR) feature of Vite.
+
+If you wish to run the app on a **different port**, then you can do so by passing the `PORT` environment variable to the make command, like so:
+
+```
+make run-dev PORT=5050
+```
+
+Now the app should be available on `http://localhost:5050`
+
+To tear down the dev environment, just exit the task running in your terminal (`Ctrl + C`) or find the container for the app (run `docker ps`), then look for the container in the list which is based on the `vue-weather-app` image) and stop the container (`docker stop <ID|NAME>`)
+
+### 💻 Running it directly on your computer
+
 Install dependencies
 ```shell
 npm install
@@ -80,5 +112,4 @@ The app is currently deployed to [GitHub Pages](https://pages.github.com/), usin
 
 ## ✅ TODOs and further ideas
 
-- Dockerize the application for both dev-environment and production
-- Add dynamic icons to temperature (based on degrees and the description). See [icon codes](https://openweathermap.org/weather-conditions).
+- Add auto-suggest for cities

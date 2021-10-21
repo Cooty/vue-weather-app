@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "scripts": {
         "lint": "eslint --fix --ext .js,.vue src",
-        "dev": "vite",
+        "dev": "vite --host 0.0.0.0",
         "build": "vite build",
         "serve": "vite preview",
         "test": "jest",
