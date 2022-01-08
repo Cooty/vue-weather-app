@@ -31,4 +31,14 @@ export default {
   .theme-dark .text-row.text-muted {
     color: var(--dark) !important;
   }
+
+  .text-row {
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (max-height: 700px) {
+    .text-row {
+      margin-bottom: .5rem;
+    }
+  }
 </style>

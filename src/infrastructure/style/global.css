@@ -16,7 +16,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media screen and (max-width: 767px) {
+  body {
+    position: fixed;
+  }
+}
+
 /* global variables */
 :root {
-  --bottom-bar-height: 3.375rem
+  --bottom-bar-height: 3.375rem;
+  --gutter: 15px; /* comes from Bootstrap */
 }
