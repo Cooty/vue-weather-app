@@ -1,10 +1,10 @@
 <template>
   <b-card
     tag="article"
-    class="shadow"
+    class="app-display shadow"
     :class="appState.theme === 'light' ? '' : 'bg-secondary'"
   >
-    <b-row class="w-100 no-gutters">
+    <b-row class="w-100 h-100 no-gutters">
       <b-col
         :cols="12"
         :md="6"
@@ -17,7 +17,7 @@
         </template>
         <div class="d-flex flex-nowrap justify-content-between">
           <h1 class="h2">
-            <weather-condition-icon :icon-code="weatherData.icon"/>
+            <weather-condition-icon :icon-code="weatherData.icon" />
             <formatted-temperature :temp="weatherData.temp" />
           </h1>
           <div>
@@ -110,3 +110,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@media screen and (max-width: 767px) {
+  .app-display {
+    box-shadow: none !important;
+    border-radius: 0;
+    border: 0;
+    margin-left: calc(var(--gutter) * -1);
+    margin-right: calc(var(--gutter) * -1);
+    height: calc(100vh - var(--bottom-bar-height) * 2);
+  }
+
+  .app-display .card-body {
+    padding-bottom: 0;
+  }
+}
+</style>
