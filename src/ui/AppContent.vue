@@ -1,5 +1,5 @@
 <template>
-  <section class="app-content d-flex flex-column justify-content-center">
+  <section class="app-content flex-column justify-content-center">
     <slot />
   </section>
 </template>
@@ -13,6 +13,7 @@ export default {
 <style scoped>
 @media screen and (min-width: 768px) {
   .app-content {
+    display: flex;
     flex: 1;
   }
 }
