@@ -1,14 +1,7 @@
 <template>
-  <b-form
-    inline
-    class="position-relative"
-    @submit.prevent="submitHandler"
-  >
-    <label
-      for="input-city"
-      class="sr-only"
-    >
-      {{ $t('messages.cityLabel') }}
+  <b-form inline class="position-relative" @submit.prevent="submitHandler">
+    <label for="input-city" class="sr-only">
+      {{ $t("messages.cityLabel") }}
     </label>
     <b-form-input
       id="input-city"
@@ -34,69 +27,65 @@
 </template>
 
 <script>
-import {
-  BForm,
-  BFormInput,
-  BButton,
-  BIconSearch
-} from 'bootstrap-vue'
-import getRandomCoordinates from '../../infrastructure/get-random-coordinates'
-import store from '../../infrastructure/store'
-import LocationFinder from './LocationFinder.vue'
+import { BForm, BFormInput, BButton, BIconSearch } from "bootstrap-vue";
+import getRandomCoordinates from "../../infrastructure/get-random-coordinates";
+import store from "../../infrastructure/store";
+import LocationFinder from "./LocationFinder.vue";
+import i18n from "../../infrastructure/i18n/i18n";
 
 export default {
-  name: 'QueryForm',
+  name: "QueryForm",
   components: {
     BForm,
     BFormInput,
     BIconSearch,
     BButton,
-    LocationFinder
+    LocationFinder,
   },
   props: {
     city: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
   data() {
     return {
       cityInput: this.city,
       appState: store.state,
-    }
+    };
   },
   computed: {
     valid() {
-      return this.cityInput
-    }
+      return this.cityInput;
+    },
   },
   watch: {
-    city: function(newVal, _) {
-      if(!newVal) {
-        this.cityInput = ''
+    city: function (newVal, _) {
+      if (!newVal) {
+        this.cityInput = "";
       }
-    }
+    },
   },
   mounted() {
-    const coords = getRandomCoordinates()
+    const coords = getRandomCoordinates();
 
-    this.$bubble('update-weather', {
+    this.$bubble("update-weather", {
       lat: coords.lat,
       lon: coords.lon,
-      lang: this.$i18n.locale,
-      units: this.appState.units
-    })
+      lang: i18n.locale,
+      units: this.appState.units,
+    });
   },
   methods: {
     submitHandler() {
-      this.$bubble('update-weather', {
+      this.$bubble("update-weather", {
         q: this.cityInput,
         lang: this.$i18n.locale,
-        units: this.appState.units
-      })
-    }
-  }
-}
+        units: this.appState.units,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
