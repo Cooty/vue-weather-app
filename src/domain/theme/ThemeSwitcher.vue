@@ -21,26 +21,38 @@
 </template>
 
 <script>
-import {BFormCheckbox, BIconMoon, BIconSun} from 'bootstrap-vue'
-import store from '../../infrastructure/store'
+import { BFormCheckbox, BIconMoon, BIconSun } from "bootstrap-vue";
+import store from "../../infrastructure/store";
+import { persistSetting } from "../../infrastructure/save-settings";
 
 export default {
-  name: 'ThemeSwitcher',
+  name: "ThemeSwitcher",
   components: {
     BFormCheckbox,
     BIconMoon,
-    BIconSun
+    BIconSun,
   },
   data() {
     return {
-      checked: false,
-      appState: store.state
-    }
+      appState: store.state,
+    };
+  },
+  computed: {
+    checked: {
+      get: function () {
+        return this.appState.theme === "dark" ? true : false;
+      },
+      set: function (newValue) {
+        console.log({ newValue });
+      },
+    },
   },
   methods: {
     changeHandler(value) {
-      store.setTheme(value ? 'dark' : 'light')
-    }
-  }
-}
+      const themeSetting = value ? "dark" : "light";
+      store.setTheme(themeSetting);
+      persistSetting("theme", themeSetting);
+    },
+  },
+};
 </script>

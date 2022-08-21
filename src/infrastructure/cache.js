@@ -1,29 +1,31 @@
 const cache = {
     makeKey(key) {
-        return `_wa_${key}`
+        return `_wa_${key}`;
     },
-    saveToCache(key, data) {
+    saveToCache(key, data, type = "session") {
         try {
-            sessionStorage.setItem(this.makeKey(key), JSON.stringify(data))
+            const storage = type === "session" ? sessionStorage : localStorage;
+            storage.setItem(this.makeKey(key), JSON.stringify(data));
         } catch (e) {
-            console.warn(e)
+            console.warn(e);
         }
     },
-    getFromCache(key) {
+    getFromCache(key, type = "session") {
         try {
-            const item = sessionStorage.getItem(this.makeKey(key))
-            if(item) {
-                return JSON.parse(item)
+            const storage = type === "session" ? sessionStorage : localStorage;
+            const item = storage.getItem(this.makeKey(key));
+            if (item) {
+                return JSON.parse(item);
             } else {
-                return false
+                return false;
             }
         } catch (e) {
-            console.warn(e)
-            return false
+            console.warn(e);
+            return false;
         }
-    }
+    },
 };
 
-Object.freeze(cache)
+Object.freeze(cache);
 
-export default cache
+export default cache;
