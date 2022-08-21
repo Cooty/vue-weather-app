@@ -8,10 +8,12 @@ import i18n from "./infrastructure/i18n/i18n";
 import bubble from "./utils/plugin/bubble";
 import { VBTooltip } from "bootstrap-vue";
 import { loadSavedSettings } from "./infrastructure/save-settings";
+import setDefaultSettings from "./infrastructure/set-default-settings";
 
 Vue.use(bubble);
 Vue.directive("b-tooltip", VBTooltip);
 
+setDefaultSettings();
 loadSavedSettings();
 
 new Vue({
