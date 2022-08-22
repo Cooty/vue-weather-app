@@ -1,23 +1,25 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import en from './translations/en'
-import de from './translations/de'
-import hu from './translations/hu'
-import bg from './translations/bg'
-import langCodes from './lang-codes'
+import Vue from "vue";
+import VueI18n from "vue-i18n";
+import en from "./translations/en";
+import de from "./translations/de";
+import hu from "./translations/hu";
+import bg from "./translations/bg";
+import langCodes from "./lang-codes";
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
+
+export const defaultLocale = langCodes.EN;
 
 const messages = {
     en,
     de,
     hu,
-    bg
-}
+    bg,
+};
 
 const i18n = new VueI18n({
-    locale: langCodes.EN,
-    messages
-})
+    locale: defaultLocale,
+    messages,
+});
 
-export default i18n
+export default i18n;
