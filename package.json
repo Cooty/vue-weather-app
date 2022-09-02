@@ -13,27 +13,29 @@
         "coverage": "npm run test -- --coverage"
     },
     "dependencies": {
-        "bootstrap-vue": "^2.21.2",
+        "@popperjs/core": "^2.11.6",
+        "bootstrap": "^5.2.0",
+        "bootstrap-vue-3": "^0.2.14",
         "leaflet": "^1.7.1",
-        "vue": "^2.6.14",
-        "vue-i18n": "^8.25.0"
+        "vue": "^3.2.38",
+        "vue-i18n": "^9.1.7"
     },
     "devDependencies": {
         "@babel/core": "^7.14.6",
         "@babel/preset-env": "^7.14.5",
         "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/vue": "^5.8.3",
-        "@vitejs/plugin-legacy": "1.4.1",
+        "@testing-library/vue": "^6.6.1",
+        "@vitejs/plugin-legacy": "2.0.1",
+        "@vitejs/plugin-vue": "^3.0.3",
         "babel-core": "^7.0.0-bridge.0",
-        "babel-jest": "^27.0.2",
+        "babel-jest": "^26.x",
         "eslint": "^7.29.0",
         "eslint-plugin-vue": "^7.11.1",
-        "jest": "^27.0.4",
+        "jest": "^26.x",
         "jest-transform-stub": "^2.0.0",
         "regenerator-runtime": "^0.13.7",
-        "vite": "^2.3.7",
-        "vite-plugin-vue2": "^1.6.2",
-        "vue-jest": "^3.0.7"
+        "vite": "^3.0.9",
+        "vue-jest": "5.0.0-alpha.10"
     },
     "jest": {
         "moduleFileExtensions": [

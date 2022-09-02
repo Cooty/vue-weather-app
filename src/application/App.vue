@@ -1,14 +1,17 @@
 <template>
-  <app-main
-    :theme="appState.theme"
-    @update-weather="onUpdateWeatherHandler"
-  >
+  <b-alert show variant="danger">
+    <!-- {{ $t(appState.errorMessage) }} -->
+    Lofasz
+  </b-alert>
+  <!-- <app-main :theme="appState.theme" @update-weather="onUpdateWeatherHandler">
     <app-header>
       <template #left>
         <query-form :city="appState.city" />
       </template>
       <template #right>
-        <ul class="mb-0 list-unstyled d-flex w-100 align-items-center justify-content-center">
+        <ul
+          class="mb-0 list-unstyled d-flex w-100 align-items-center justify-content-center"
+        >
           <li class="mr-3">
             <theme-switcher />
           </li>
@@ -24,7 +27,11 @@
 
     <app-content>
       <wrapper>
-        <template v-if="appState.weatherData && !appState.isLoading && !appState.isError">
+        <template
+          v-if="
+            appState.weatherData && !appState.isLoading && !appState.isError
+          "
+        >
           <display
             :weather-data="appState.weatherData"
             :city="appState.city"
@@ -41,103 +48,94 @@
           </div>
         </template>
         <template v-else-if="appState.isError">
-          <b-alert
-            show
-            variant="danger"
-          >
+          <b-alert show variant="danger">
             {{ $t(appState.errorMessage) }}
           </b-alert>
         </template>
       </wrapper>
     </app-content>
-  </app-main>
+  </app-main> -->
 </template>
 
 <script>
-import QueryForm from '../domain/query/QueryForm.vue'
-import Display from '../domain/display/Display.vue'
-import store from '../infrastructure/store'
-import Wrapper from '../ui/Wrapper.vue'
-import AppMain from '../ui/AppMain.vue'
-import AppHeader from '../ui/AppHeader.vue'
-import AppContent from '../ui/AppContent.vue'
-import {BSpinner, BAlert} from 'bootstrap-vue'
-import LanguageChanger from '../infrastructure/i18n/LanguageChanger.vue'
-import {getWeather} from '../infrastructure/api/api'
-import {makeWeatherData} from '../infrastructure/factory/weather-data'
+// import QueryForm from "../domain/query/QueryForm.vue";
+// import Display from "../domain/display/Display.vue";
+import store from "../infrastructure/store";
+// import Wrapper from "../ui/Wrapper.vue";
+// import AppMain from "../ui/AppMain.vue";
+// import AppHeader from "../ui/AppHeader.vue";
+// import AppContent from "../ui/AppContent.vue";
+// import { BSpinner, BAlert } from "bootstrap-vue";
+// import LanguageChanger from "../infrastructure/i18n/LanguageChanger.vue";
+import { getWeather } from "../infrastructure/api/api";
+import { makeWeatherData } from "../infrastructure/factory/weather-data";
 import {
   errorHandler,
   setCityData,
   setCoordsData,
-  setToLoadingState
-} from '../infrastructure/data-update'
-import cache from '../infrastructure/cache'
-import serialize from '../utils/serialize'
-import Coords from '../infrastructure/model/Coords'
-import UnitSwitcher from '../domain/units/UnitSwitcher.vue'
-import ThemeSwitcher from '../domain/theme/ThemeSwitcher.vue';
+  setToLoadingState,
+} from "../infrastructure/data-update";
+import cache from "../infrastructure/cache";
+import serialize from "../utils/serialize";
+import Coords from "../infrastructure/model/Coords";
+// import UnitSwitcher from "../domain/units/UnitSwitcher.vue";
+// import ThemeSwitcher from "../domain/theme/ThemeSwitcher.vue";
 
 export default {
-  name: 'App',
-  components: {
-    QueryForm,
-    Display,
-    BSpinner,
-    BAlert,
-    Wrapper,
-    LanguageChanger,
-    AppHeader,
-    AppMain,
-    AppContent,
-    UnitSwitcher,
-    ThemeSwitcher
-  },
-  data() {
-    return {
-      appState: store.state
-    }
-  },
-  methods: {
-    onUpdateWeatherHandler: async (params) => {
-      setToLoadingState(store)
-      try {
-        const cacheKey = serialize(params)
-        const cachedResponse = cache.getFromCache(cacheKey)
-        let weatherApiResponse
+  name: "App",
+  // components: {
+  //   QueryForm,
+  //   Display,
+  //   BSpinner,
+  //   BAlert,
+  //   Wrapper,
+  //   LanguageChanger,
+  //   AppHeader,
+  //   AppMain,
+  //   AppContent,
+  //   UnitSwitcher,
+  //   ThemeSwitcher,
+  // },
+  // data() {
+  //   return {
+  //     appState: store.state,
+  //   };
+  // },
+  // methods: {
+  //   onUpdateWeatherHandler: async (params) => {
+  //     setToLoadingState(store);
+  //     try {
+  //       const cacheKey = serialize(params);
+  //       const cachedResponse = cache.getFromCache(cacheKey);
+  //       let weatherApiResponse;
 
-        if(cachedResponse) {
-          weatherApiResponse = cachedResponse
-        } else {
-          weatherApiResponse = await getWeather(params)
+  //       if (cachedResponse) {
+  //         weatherApiResponse = cachedResponse;
+  //       } else {
+  //         weatherApiResponse = await getWeather(params);
 
-          cache.saveToCache(cacheKey, weatherApiResponse)
-        }
+  //         cache.saveToCache(cacheKey, weatherApiResponse);
+  //       }
 
-        const weatherData = makeWeatherData(weatherApiResponse)
-        const coords = new Coords(weatherApiResponse.coord.lat, weatherApiResponse.coord.lon)
+  //       const weatherData = makeWeatherData(weatherApiResponse);
+  //       const coords = new Coords(
+  //         weatherApiResponse.coord.lat,
+  //         weatherApiResponse.coord.lon
+  //       );
 
-        if(params.q) {
-          setCityData(
-            weatherData,
-            coords,
-            params.q,
-            store
-          )
-        } else {
-          setCoordsData(
-            weatherData,
-            coords,
-            store
-          )
-        }
+  //       if (params.q) {
+  //         setCityData(weatherData, coords, params.q, store);
+  //       } else {
+  //         setCoordsData(weatherData, coords, store);
+  //       }
 
-        store.setUnits(params.units)
-      } catch(e) {
-        errorHandler(e, store)
-      } finally {
-        store.setIsLoading(false)
-      }
-    }
-  }
-}
+  //       store.setUnits(params.units);
+  //     } catch (e) {
+  //       errorHandler(e, store);
+  //     } finally {
+  //       store.setIsLoading(false);
+  //     }
+  //   },
+  // },
+};
 </script>
