@@ -6,7 +6,7 @@ import "./infrastructure/style/global.css";
 import "./domain/theme/theming.css";
 import App from "./application/App.vue";
 import i18n from "./infrastructure/i18n/i18n";
-// import bubble from "./utils/plugin/bubble";
+import bubble from "./utils/plugin/bubble";
 // import { VBTooltip } from "bootstrap-vue";
 import { loadSavedSettings } from "./infrastructure/save-settings";
 import setDefaultSettings from "./infrastructure/set-default-settings";
@@ -16,7 +16,7 @@ loadSavedSettings();
 
 const app = createApp(App);
 
-// app.use(bubble);
+app.directive("bubble", bubble);
 app.use(i18n);
 app.use(BootstrapVue3);
 // app.directive("b-tooltip", VBTooltip);
