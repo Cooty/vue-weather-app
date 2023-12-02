@@ -1,22 +1,22 @@
 export const errorHandler = (e, store) => {
-    store.setIsError(true)
-    store.setErrorMessage(e.message)
-}
+    store.isError = true;
+    store.errorMessage = e.message;
+};
 
 export const setToLoadingState = (store) => {
-    store.setIsLoading(true)
-    store.setErrorMessage('')
-    store.setIsError(false)
-}
+    store.isLoading = true;
+    store.ErrorMessage = "";
+    store.isError = false;
+};
 
 export const setCityData = (weatherData, coords, city, store) => {
-    store.setWeatherData(weatherData)
-    store.setCoords(coords)
-    store.setCity(city)
-}
+    store.weatherData = weatherData;
+    store.coords = coords;
+    store.city = city;
+};
 
 export const setCoordsData = (weatherData, coords, store) => {
-    store.setWeatherData(weatherData)
-    store.setCoords(coords)
-    store.setCity('')
-}
+    store.weatherData = weatherData;
+    store.coords = coords;
+    store.city = "";
+};

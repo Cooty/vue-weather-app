@@ -17,7 +17,18 @@ The main `them-light` / `theme-dark` class that's cascading is added in the `ui/
 }
 
 .theme-dark {
+  --bs-heading-color: var(--light);
   background: var(--dark);
+  color: var(--light);
+}
+
+.theme-dark .card-body {
+  color: var(--light);
+}
+
+.theme-dark .form-select {
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f8f9fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-color: var(--dark-form-control-bg);
   color: var(--light);
 }
 
@@ -26,6 +37,8 @@ Colors taken from:
 https://bootswatch.com/darkly/
 */
 :root {
+  --light: #f8f9fa;
+  --dark: #343a40;
   --dark-primary: #375a7f;
   --dark-primary-active-bg: #2c4866;
   --dark-primary-active-border: #29445f;
@@ -42,6 +55,7 @@ https://bootswatch.com/darkly/
   color: var(--light);
   background-color: var(--dark-primary);
   border-color: var(--dark-primary);
+  --bs-heading-color: var(--light);
 }
 
 .theme-dark .btn-primary:not(:disabled):not(.disabled):active,
@@ -51,14 +65,19 @@ https://bootswatch.com/darkly/
   border-color: var(--dark-primary-active-border);
 }
 
-.theme-dark .form-control {
+.theme-dark .form-control,
+.theme-dark .form-control:focus {
   background-color: var(--dark-form-control-bg);
   border-color: var(--dark-form-control-border);
   color: var(--light);
 }
 
+.theme-dark .form-control::placeholder {
+  color: var(--bs-gray-500);
+}
+
 .theme-dark .form-control:focus {
-  border-color: var(--dark-form-control-border-active)
+  border-color: var(--dark-form-control-border-active);
 }
 
 .theme-dark .custom-control-input:checked ~ .custom-control-label::before {
@@ -87,12 +106,6 @@ https://bootswatch.com/darkly/
 
 .bg-dark-form-control-border {
   background-color: var(--dark-form-control-bg);
-}
-
-.theme-dark .custom-select {
-  background-color: var(--dark-form-control-bg);
-  color: var(--light);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23f8f9fa' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e");
 }
 
 .theme-dark .badge-info {

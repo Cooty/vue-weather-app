@@ -1,46 +1,37 @@
 <template>
-  <b-form-select v-model="lang" :options="languages" @change="changeHandler" />
+  <b-form-select
+    v-model="i18n.global.locale.value"
+    :options="languages"
+    @change="changeHandler"
+  />
 </template>
 
-<script>
-import { BFormSelect } from "bootstrap-vue";
+<script setup>
 import langCodes from "./lang-codes";
 import store from "../store";
 import { persistSetting } from "../../infrastructure/save-settings";
 import i18n from "./i18n";
 
-export default {
-  name: "LanguageChanger",
-  components: {
-    BFormSelect,
-  },
-  data() {
-    return {
-      lang: i18n.locale,
-      languages: [
-        { text: "English", value: langCodes.EN },
-        { text: "Deutsch", value: langCodes.DE },
-        { text: "Magyar", value: langCodes.HU },
-        { text: "български", value: langCodes.BG },
-      ],
-    };
-  },
-  methods: {
-    changeHandler(value) {
-      const params = {
-        lat: store.state.coords.lat,
-        lon: store.state.coords.lon,
-        q: store.state.city,
-        lang: value,
-        units: store.state.units,
-      };
+function changeHandler(value) {
+  const params = {
+    lat: store.coords.lat,
+    lon: store.coords.lon,
+    q: store.city,
+    lang: value,
+    units: store.units,
+  };
 
-      i18n.locale = value;
+  // i18n.locale = value;
 
-      persistSetting("lang", value);
+  persistSetting("lang", value);
 
-      this.$bubble("update-weather", params);
-    },
-  },
-};
+  store.params = params;
+}
+
+const languages = [
+  { text: "English", value: langCodes.EN },
+  { text: "Deutsch", value: langCodes.DE },
+  { text: "Magyar", value: langCodes.HU },
+  { text: "български", value: langCodes.BG },
+];
 </script>

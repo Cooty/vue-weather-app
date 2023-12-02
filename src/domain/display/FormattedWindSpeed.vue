@@ -1,37 +1,37 @@
 <template>
   <span class="text-nowrap">
-    <span class="mr-1">
-      <b-icon-arrow-up :style="`transform: rotate(${windDeg}deg)`" />
-    </span>{{ $n(windSpeed, {maximumFractionDigits: 1}) }}{{ unit }}
+    <span class="me-1">
+      <i-bi-arrow-up :style="`transform: rotate(${windDeg}deg)`" />
+    </span>
+    {{ n(windSpeed, { maximumFractionDigits: 1 }) }}{{ unit }}
   </span>
 </template>
 
 <script>
-import store from '../../infrastructure/store'
-import { BIconArrowUp } from 'bootstrap-vue'
+import { useI18n } from "vue-i18n";
+import store from "../../infrastructure/store";
 
 export default {
-  name: 'FormattedWindSpeed',
-  components: { BIconArrowUp },
+  name: "FormattedWindSpeed",
   props: {
     windSpeed: {
       type: Number,
-      required: true
+      required: true,
     },
     windDeg: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
-  data() {
-    return {
-      appState: store.state
-    }
+  setup() {
+    const { n } = useI18n();
+
+    return { n };
   },
   computed: {
-    unit: function() {
-      return this.appState.units === 'metric' ? 'm/s' : 'mph'
-    }
-  }
-}
+    unit: function () {
+      return store.units === "metric" ? "m/s" : "mph";
+    },
+  },
+};
 </script>

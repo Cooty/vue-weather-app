@@ -18,15 +18,12 @@ const dummyTranslations = {
     "messages.imperial": imperialEn,
 };
 
-const mockBubble = jest.fn(() => undefined).mockName("bubbles");
-
 const mocks = {
     $t: (key) => dummyTranslations[key],
     $n: (n) => n,
     // $i18n: {
     //     locale: 'en'
     // },
-    $bubble: mockBubble,
 };
 
 describe("Renders a switch to toggle units", () => {
@@ -41,7 +38,7 @@ describe("Renders a switch to toggle units", () => {
         const dummyLat = 42.5061;
         const dummyLon = 27.4678;
         const dummyCoords = new Coords(dummyLat, dummyLon);
-        store.setCoords(dummyCoords);
+        store.coords = dummyCoords;
         const { getByTestId } = render(UnitSwitcher, { mocks });
         const fahrenheit = getByTestId("imperial");
         await fireEvent.click(fahrenheit);

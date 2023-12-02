@@ -1,21 +1,17 @@
 <template>
-  <b-alert show variant="danger">
-    <!-- {{ $t(appState.errorMessage) }} -->
-    Lofasz
-  </b-alert>
-  <!-- <app-main :theme="appState.theme" @update-weather="onUpdateWeatherHandler">
+  <app-main :theme="store.theme">
     <app-header>
       <template #left>
-        <query-form :city="appState.city" />
+        <query-form :city="store.city" />
       </template>
       <template #right>
         <ul
           class="mb-0 list-unstyled d-flex w-100 align-items-center justify-content-center"
         >
-          <li class="mr-3">
+          <li class="me-3 mx-lg-3">
             <theme-switcher />
           </li>
-          <li class="mr-3">
+          <li class="me-3">
             <unit-switcher />
           </li>
           <li>
@@ -28,45 +24,44 @@
     <app-content>
       <wrapper>
         <template
-          v-if="
-            appState.weatherData && !appState.isLoading && !appState.isError
-          "
+          v-if="store.weatherData && !store.isLoading && !store.isError"
         >
           <display
-            :weather-data="appState.weatherData"
-            :city="appState.city"
-            :coords="appState.coords"
+            :weather-data="store.weatherData"
+            :city="store.city"
+            :coords="store.coords"
           />
         </template>
-        <template v-else-if="appState.isLoading">
+        <template v-else-if="store.isLoading">
           <div class="text-center">
             <b-spinner
-              :title="$t('messages.loading')"
+              :title="t('messages.loading')"
               variant="primary"
-              :label="$t('messages.loading')"
+              :label="t('messages.loading')"
             />
           </div>
         </template>
-        <template v-else-if="appState.isError">
+        <template v-else-if="store.isError">
           <b-alert show variant="danger">
-            {{ $t(appState.errorMessage) }}
+            {{ t(store.errorMessage) }}
           </b-alert>
         </template>
       </wrapper>
     </app-content>
-  </app-main> -->
+  </app-main>
 </template>
 
-<script>
-// import QueryForm from "../domain/query/QueryForm.vue";
-// import Display from "../domain/display/Display.vue";
+<script setup>
+import { watch } from "vue";
+import { useI18n } from "vue-i18n";
+import QueryForm from "../domain/query/QueryForm.vue";
+import Display from "../domain/display/Display.vue";
 import store from "../infrastructure/store";
-// import Wrapper from "../ui/Wrapper.vue";
-// import AppMain from "../ui/AppMain.vue";
-// import AppHeader from "../ui/AppHeader.vue";
-// import AppContent from "../ui/AppContent.vue";
-// import { BSpinner, BAlert } from "bootstrap-vue";
-// import LanguageChanger from "../infrastructure/i18n/LanguageChanger.vue";
+import Wrapper from "../ui/Wrapper.vue";
+import AppMain from "../ui/AppMain.vue";
+import AppHeader from "../ui/AppHeader.vue";
+import AppContent from "../ui/AppContent.vue";
+import LanguageChanger from "../infrastructure/i18n/LanguageChanger.vue";
 import { getWeather } from "../infrastructure/api/api";
 import { makeWeatherData } from "../infrastructure/factory/weather-data";
 import {
@@ -78,64 +73,50 @@ import {
 import cache from "../infrastructure/cache";
 import serialize from "../utils/serialize";
 import Coords from "../infrastructure/model/Coords";
-// import UnitSwitcher from "../domain/units/UnitSwitcher.vue";
-// import ThemeSwitcher from "../domain/theme/ThemeSwitcher.vue";
+import UnitSwitcher from "../domain/units/UnitSwitcher.vue";
+import ThemeSwitcher from "../domain/theme/ThemeSwitcher.vue";
 
-export default {
-  name: "App",
-  // components: {
-  //   QueryForm,
-  //   Display,
-  //   BSpinner,
-  //   BAlert,
-  //   Wrapper,
-  //   LanguageChanger,
-  //   AppHeader,
-  //   AppMain,
-  //   AppContent,
-  //   UnitSwitcher,
-  //   ThemeSwitcher,
-  // },
-  // data() {
-  //   return {
-  //     appState: store.state,
-  //   };
-  // },
-  // methods: {
-  //   onUpdateWeatherHandler: async (params) => {
-  //     setToLoadingState(store);
-  //     try {
-  //       const cacheKey = serialize(params);
-  //       const cachedResponse = cache.getFromCache(cacheKey);
-  //       let weatherApiResponse;
+const { t } = useI18n();
 
-  //       if (cachedResponse) {
-  //         weatherApiResponse = cachedResponse;
-  //       } else {
-  //         weatherApiResponse = await getWeather(params);
+const onUpdateWeatherHandler = async (params) => {
+  setToLoadingState(store);
+  try {
+    const cacheKey = serialize(params);
+    const cachedResponse = cache.getFromCache(cacheKey);
+    let weatherApiResponse;
 
-  //         cache.saveToCache(cacheKey, weatherApiResponse);
-  //       }
+    if (cachedResponse) {
+      weatherApiResponse = cachedResponse;
+    } else {
+      weatherApiResponse = await getWeather(params);
 
-  //       const weatherData = makeWeatherData(weatherApiResponse);
-  //       const coords = new Coords(
-  //         weatherApiResponse.coord.lat,
-  //         weatherApiResponse.coord.lon
-  //       );
+      cache.saveToCache(cacheKey, weatherApiResponse);
+    }
 
-  //       if (params.q) {
-  //         setCityData(weatherData, coords, params.q, store);
-  //       } else {
-  //         setCoordsData(weatherData, coords, store);
-  //       }
+    const weatherData = makeWeatherData(weatherApiResponse);
+    const coords = new Coords(
+      weatherApiResponse.coord.lat,
+      weatherApiResponse.coord.lon
+    );
 
-  //       store.setUnits(params.units);
-  //     } catch (e) {
-  //       errorHandler(e, store);
-  //     } finally {
-  //       store.setIsLoading(false);
-  //     }
-  //   },
-  // },
+    if (params.q) {
+      setCityData(weatherData, coords, params.q, store);
+    } else {
+      setCoordsData(weatherData, coords, store);
+    }
+
+    store.units = params.units;
+  } catch (e) {
+    errorHandler(e, store);
+  } finally {
+    store.isLoading = false;
+  }
 };
+
+watch(
+  () => store.params,
+  (newParams, _) => {
+    onUpdateWeatherHandler(newParams);
+  }
+);
 </script>

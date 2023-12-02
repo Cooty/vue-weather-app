@@ -22,7 +22,6 @@ const mocks = {
     // $i18n: {
     //     locale: 'en'
     // },
-    $bubble: jest.fn(),
 };
 
 describe("A component for querying weather data", () => {
@@ -48,7 +47,7 @@ describe("A component for querying weather data", () => {
         });
         const city = "Budapest";
 
-        store.setIsLoading(false);
+        store.isLoading = false;
 
         const cityInput = getByPlaceholderText("Type your city");
         await fireEvent.update(cityInput, city);

@@ -1,7 +1,11 @@
 <template>
   <p
     class="text-row"
-    :class="{'font-weight-bold': bold, 'text-muted': muted, 'mb-0': noBottomMargin}"
+    :class="{
+      'font-weight-bold': bold,
+      'text-muted': muted,
+      'mb-0': noBottomMargin,
+    }"
   >
     <slot />
   </p>
@@ -9,36 +13,32 @@
 
 <script>
 export default {
-  name: 'TextRow',
+  name: "TextRow",
   props: {
     bold: {
       type: Boolean,
-      default: false
+      default: false,
     },
     muted: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noBottomMargin: {
       type: Boolean,
-      default: false
-    }
-  }
-}
+      default: false,
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .theme-dark .text-row.text-muted {
-    color: var(--dark) !important;
-  }
+.text-row {
+  margin-bottom: 1rem;
+}
 
+@media screen and (max-height: 700px) {
   .text-row {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
-
-  @media screen and (max-height: 700px) {
-    .text-row {
-      margin-bottom: .5rem;
-    }
-  }
+}
 </style>

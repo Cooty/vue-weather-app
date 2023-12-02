@@ -1,7 +1,8 @@
 /* This file should be included after Bootstrap (or any other third party CSS framework) */
 
 html,
-body {
+body,
+#app {
   width: 100%;
   height: 100%;
 }
@@ -25,6 +26,5 @@ body {
 
 /* global variables */
 :root {
-  --bottom-bar-height: 3.375rem;
-  --gutter: 15px; /* comes from Bootstrap */
+  --bottom-bar-height: 54px;
 }

@@ -37,16 +37,19 @@ To tear down the dev environment, just exit the task running in your terminal (`
 ### 💻 Running it directly on your computer
 
 Install dependencies
+
 ```shell
 npm install
 ```
 
 To run the app in development mode
+
 ```shell
 npm run dev
 ```
 
 To build it and start the dev-server in preview mode
+
 ```shell
 npm run build && npm run serve
 ```
@@ -79,6 +82,7 @@ Currently, we use the settings `plugin:vue/recommended`, for full list of rules 
 General file-formatting rules are set up via [EditorConfig](https://editorconfig.org/), see `.editorconfig` for details.
 
 #### ✍️ File naming
+
 Files and folders should generally be named in `kebab-case`.
 Exceptions are `*.vue` files and `*.js` files that export a single class, in these cases use `PascalCase`.
 
@@ -103,13 +107,16 @@ The architecture mostly follows the convention for [Elegant Frontend Architectur
 
 ## 🥞 Tech stack
 
-- Framework: [Vue.js (V2)](https://vuejs.org/v2/guide/)
-- UI library: [Bootstrap Vue](https://bootstrap-vue.org/)
-- Build-tool and development environment: [Vite](https://vitejs.dev/)
+-   Framework: [Vue.js (V3)](https://vuejs.org/guide/introduction.html)
+-   UI library: [bootstrap-vue-3](https://cdmoro.github.io/bootstrap-vue-3/)
+-   Build-tool and development environment: [Vite](https://vitejs.dev/)
 
 ## 🚢 Deployment
+
 The app is currently deployed to [GitHub Pages](https://pages.github.com/), using automated GitHub actions (see `~/.github/workflows/main.yml`).
 
 ## ✅ TODOs and further ideas
 
-- Add auto-suggest for cities
+-   Add auto-suggest for cities
+-   Switch icons: https://coreui.io/vue/docs/components/icon.html
+-   Remove the `bubble` event implementation

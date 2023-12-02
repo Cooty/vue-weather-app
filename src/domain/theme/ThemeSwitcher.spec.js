@@ -9,8 +9,6 @@ jest.mock("../../infrastructure/environment", () => {
     };
 });
 
-const mockBubble = jest.fn(() => console.log("fooooo")).mockName("bubbles");
-
 const switchThemeEn = "switch theme";
 
 const dummyTranslations = {
@@ -23,7 +21,6 @@ const mocks = {
     // $i18n: {
     //     locale: 'en'
     // },
-    $bubble: mockBubble,
 };
 
 describe("A component for changing between light and dark theme", () => {
@@ -37,8 +34,8 @@ describe("A component for changing between light and dark theme", () => {
     it("changes the theme to dark once it's checked", async () => {
         const { getByLabelText } = render(ThemeSwitcher, { mocks });
         const checkbox = getByLabelText(switchThemeEn);
-        expect(store.state.theme).toEqual("light");
+        expect(store.theme).toEqual("light");
         await fireEvent.click(checkbox);
-        expect(store.state.theme).toEqual("dark");
+        expect(store.theme).toEqual("dark");
     });
 });
