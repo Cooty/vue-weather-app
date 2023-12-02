@@ -5,17 +5,17 @@ import i18n from "./i18n/i18n";
 export const loadSavedSettings = () => {
     const savedUnit = cache.getFromCache("unit", "local");
     if (savedUnit) {
-        store.setUnits(savedUnit);
+        store.units = savedUnit;
     }
 
     const savedThemeSetting = cache.getFromCache("theme", "local");
     if (savedThemeSetting) {
-        store.setTheme(savedThemeSetting);
+        store.theme = savedThemeSetting;
     }
 
     const savedLang = cache.getFromCache("lang", "local");
     if (savedLang) {
-        i18n.locale = savedLang;
+        i18n.global.locale.value = savedLang;
     }
 };
 

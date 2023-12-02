@@ -30,7 +30,6 @@ const mocks = {
     // $i18n: {
     //     locale: "en",
     // },
-    $bubble: jest.fn(),
 };
 
 describe("The main component for displaying the application", () => {
@@ -49,7 +48,7 @@ describe("The main component for displaying the application", () => {
 
     it("displays an error state when the data indicates", () => {
         const dummyErrorMessage = "messages.error";
-        store.setIsLoading(false);
+        store.isLoading = false;
         const { getByText } = render(App, {
             data: () => ({
                 appState: {

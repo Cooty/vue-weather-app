@@ -1,13 +1,11 @@
 <template>
   <div
     class="rounded"
-    :class="
-      appState.theme === 'dark' ? 'bg-dark-form-control-border' : 'bg-white'
-    "
+    :class="store.theme === 'dark' ? 'bg-dark-form-control-border' : 'bg-white'"
   >
     <b-form-radio-group
       id="unit-switcher"
-      v-model="appState.units"
+      v-model="store.units"
       name="unit-switcher-buttons"
       button-variant="outline-primary"
       buttons
@@ -15,10 +13,10 @@
       @change="changeHandler"
     >
       <b-form-radio value="metric" data-testid="metric">
-        <span class="d-none d-md-inline">{{ $t("messages.metric") }}: </span>°C
+        <span class="d-none d-md-inline">{{ t("messages.metric") }}: </span>°C
       </b-form-radio>
       <b-form-radio value="imperial" data-testid="imperial">
-        <span class="d-none d-md-inline"> {{ $t("messages.imperial") }}: </span
+        <span class="d-none d-md-inline"> {{ t("messages.imperial") }}: </span
         >°F
       </b-form-radio>
     </b-form-radio-group>
@@ -26,35 +24,33 @@
 </template>
 
 <script>
-import { BFormRadioGroup, BFormRadio } from "bootstrap-vue";
+import { useI18n } from "vue-i18n";
 import store from "../../infrastructure/store";
 import { persistSetting } from "../../infrastructure/save-settings";
 import i18n from "../../infrastructure/i18n/i18n";
 
 export default {
   name: "UnitSwitcher",
-  components: {
-    BFormRadioGroup,
-    BFormRadio,
-  },
-  data() {
+  setup() {
+    const { t } = useI18n();
     return {
-      appState: store.state,
+      store,
+      t,
     };
   },
   methods: {
     changeHandler(value) {
       const params = {
-        lat: store.state.coords.lat,
-        lon: store.state.coords.lon,
-        q: store.state.city,
+        lat: store.coords.lat,
+        lon: store.coords.lon,
+        q: store.city,
         lang: i18n.locale,
         units: value,
       };
 
       persistSetting("unit", value);
 
-      this.$bubble("update-weather", params);
+      store.params = params;
     },
   },
 };

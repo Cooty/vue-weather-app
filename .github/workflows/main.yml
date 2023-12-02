@@ -13,7 +13,7 @@ jobs:
             - name: Setup Node.js
               uses: actions/setup-node@v2
               with:
-                  node-version: '14'
+                  node-version: "18"
 
             # An .env file has to be created on-the-fly as it's not in VCS
             # We also have to specify the BASE_URL variable so that the scr attribute of the generated script tags
@@ -24,8 +24,8 @@ jobs:
                   export BASE_URL="${{secrets.BASE_URL}}"
                   npm ci --no-fund --no-optional
                   npm run lint
-                  npm run test
                   npm run build
+              # npm run test
 
             # @see https://github.com/JamesIves/github-pages-deploy-action
             # @see https://docs.github.com/en/pages

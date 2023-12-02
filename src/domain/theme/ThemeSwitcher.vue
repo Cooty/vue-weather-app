@@ -4,53 +4,44 @@
     name="theme-switcher"
     switch
     size="lg"
-    :aria-label="$t('messages.switchTheme')"
+    :aria-label="t('messages.switchTheme')"
     @change="changeHandler"
   >
-    <template v-if="appState.theme === 'dark'">
+    <template v-if="store.theme === 'dark'">
       <span class="text-light">
-        <b-icon-sun />
+        <i-bi-sun />
       </span>
     </template>
     <template v-else>
       <span class="text-secondary">
-        <b-icon-moon />
+        <i-bi-moon />
       </span>
     </template>
   </b-form-checkbox>
 </template>
 
 <script>
-import { BFormCheckbox, BIconMoon, BIconSun } from "bootstrap-vue";
 import store from "../../infrastructure/store";
 import { persistSetting } from "../../infrastructure/save-settings";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "ThemeSwitcher",
-  components: {
-    BFormCheckbox,
-    BIconMoon,
-    BIconSun,
-  },
-  data() {
-    return {
-      appState: store.state,
-    };
+  setup() {
+    const { t } = useI18n();
+    return { store, t };
   },
   computed: {
     checked: {
       get: function () {
-        return this.appState.theme === "dark" ? true : false;
-      },
-      set: function (newValue) {
-        console.log({ newValue });
+        return store.theme === "dark" ? true : false;
       },
     },
   },
   methods: {
     changeHandler(value) {
       const themeSetting = value ? "dark" : "light";
-      store.setTheme(themeSetting);
+      store.theme = themeSetting;
       persistSetting("theme", themeSetting);
     },
   },

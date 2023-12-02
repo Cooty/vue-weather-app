@@ -1,29 +1,22 @@
 <template>
-  <span class="text-nowrap">
-    {{ Math.floor(temp) }}{{ unit }}
-  </span>
+  <span class="text-nowrap"> {{ Math.floor(temp) }}{{ unit }} </span>
 </template>
 
 <script>
-import store from '../../infrastructure/store'
+import store from "../../infrastructure/store";
 
 export default {
-  name: 'FormattedTemperature',
+  name: "FormattedTemperature",
   props: {
     temp: {
       type: Number,
-      required: true
-    }
-  },
-  data() {
-    return {
-      appState: store.state
-    }
+      required: true,
+    },
   },
   computed: {
-    unit: function() {
-      return this.appState.units === 'metric' ? '°C' : '°F'
-    }
-  }
-}
+    unit: function () {
+      return store.units === "metric" ? "°C" : "°F";
+    },
+  },
+};
 </script>

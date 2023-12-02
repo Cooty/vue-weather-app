@@ -1,34 +1,34 @@
 <template>
   <span class="text-nowrap">
-    {{ $n(formattedVisibility, {maximumFractionDigits: 1}) }}{{ unit }}
+    {{ n(formattedVisibility, { maximumFractionDigits: 1 }) }}{{ unit }}
   </span>
 </template>
 
 <script>
-import store from '../../infrastructure/store'
+import { useI18n } from "vue-i18n";
+import store from "../../infrastructure/store";
 
 export default {
-  name: 'FormattedVisibility',
+  name: "FormattedVisibility",
   props: {
     visibility: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
-  data() {
-    return {
-      appState: store.state
-    }
+  setup() {
+    const { n } = useI18n();
+
+    return { n };
   },
   computed: {
-    formattedVisibility: function() {
-      const divisor = this.appState.units === 'metric' ? 1000 : 1609
-
-      return (this.visibility / divisor).toFixed(1)
+    formattedVisibility: function () {
+      const divisor = store.units === "metric" ? 1000 : 1609;
+      return Number((this.visibility / divisor).toFixed(1));
     },
-    unit: function() {
-      return this.appState.units === 'metric' ? 'km' : 'mi'
-    }
-  }
-}
+    unit: function () {
+      return store.units === "metric" ? "km" : "mi";
+    },
+  },
+};
 </script>
