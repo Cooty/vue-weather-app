@@ -74,7 +74,7 @@ export default {
     store.params = {
       lat: coords.lat,
       lon: coords.lon,
-      lang: i18n.locale,
+      lang: i18n.global.locale.value,
       units: store.units,
     };
   },

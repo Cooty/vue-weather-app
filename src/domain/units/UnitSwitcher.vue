@@ -44,7 +44,7 @@ export default {
         lat: store.coords.lat,
         lon: store.coords.lon,
         q: store.city,
-        lang: i18n.locale,
+        lang: i18n.global.locale.value,
         units: value,
       };
 
