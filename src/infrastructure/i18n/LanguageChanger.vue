@@ -21,8 +21,6 @@ function changeHandler(value) {
     units: store.units,
   };
 
-  // i18n.locale = value;
-
   persistSetting("lang", value);
 
   store.params = params;
