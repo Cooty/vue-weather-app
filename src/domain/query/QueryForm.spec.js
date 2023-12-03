@@ -3,13 +3,6 @@ import QueryForm from "./QueryForm.vue";
 import getRandomCoordinates from "../../infrastructure/get-random-coordinates";
 import store from "../../infrastructure/store";
 
-jest.mock("../../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-        MODE: "prod",
-    };
-});
-
 jest.mock("../../infrastructure/get-random-coordinates");
 
 const dummyTranslations = {

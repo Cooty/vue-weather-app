@@ -2,12 +2,6 @@ import store from "./store";
 import WeatherData from "./model/WeatherData";
 import Coords from "./model/Coords";
 
-jest.mock("./environment", () => {
-    return {
-        MODE: "prod",
-    };
-});
-
 describe("an object for storing data that's globally accessible", () => {
     it("can store the weather data", () => {
         const weatherData = new WeatherData(20.4, "cloudy", "18", "56", 1000);

@@ -3,13 +3,6 @@ import UnitSwitcher from "./UnitSwitcher.vue";
 import store from "../../infrastructure/store";
 import Coords from "../../infrastructure/model/Coords";
 
-jest.mock("../../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-        MODE: "prod",
-    };
-});
-
 const metricEn = "Metric";
 const imperialEn = "Imperial";
 

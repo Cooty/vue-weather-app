@@ -5,12 +5,6 @@ import WeatherData from "../infrastructure/model/WeatherData";
 import store from "../infrastructure/store";
 import Coords from "../infrastructure/model/Coords";
 
-jest.mock("../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-    };
-});
-
 global.fetch = jest.fn(() =>
     Promise.resolve({
         status: 200,

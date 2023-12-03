@@ -2,13 +2,6 @@ import { render } from "@testing-library/vue";
 import FormattedVisibility from "./FormattedVisibility";
 import store from "../../infrastructure/store";
 
-jest.mock("../../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-        MODE: "prod",
-    };
-});
-
 const mocks = {
     $n: () => "10.6",
     $i18n: {

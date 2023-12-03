@@ -9,7 +9,7 @@
         "dev": "vite --host 0.0.0.0",
         "build": "vite build",
         "serve": "vite preview",
-        "test": "jest",
+        "test": "vitest",
         "coverage": "npm run test -- --coverage"
     },
     "dependencies": {
@@ -29,34 +29,13 @@
         "@vitejs/plugin-vue": "^4.3.4",
         "@vue/compiler-sfc": "^3.3.4",
         "babel-core": "^7.0.0-bridge.0",
-        "babel-jest": "^26.x",
         "eslint": "^7.29.0",
         "eslint-plugin-vue": "^7.11.1",
-        "jest": "^26.x",
-        "jest-transform-stub": "^2.0.0",
+        "happy-dom": "^12.10.3",
         "regenerator-runtime": "^0.13.7",
         "unplugin-icons": "^0.17.0",
         "unplugin-vue-components": "^0.25.2",
         "vite": "^4.4.9",
-        "vue-jest": "5.0.0-alpha.10"
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "vue"
-        ],
-        "transform": {
-            "^.+\\.js$": "babel-jest",
-            ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
-            ".*\\.(vue)$": "vue-jest"
-        },
-        "setupFilesAfterEnv": [
-            "<rootDir>/jest-setup.js"
-        ],
-        "testEnvironment": "jsdom",
-        "moduleNameMapper": {
-            "^.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
-        }
+        "vitest": "^0.34.6"
     }
 }

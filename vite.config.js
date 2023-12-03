@@ -29,4 +29,8 @@ export default defineConfig({
     chokidarWatchOptions: {
         usePolling: true,
     },
+    test: {
+        globals: true,
+        environment: "happy-dom",
+    },
 });

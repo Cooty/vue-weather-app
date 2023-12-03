@@ -1,13 +1,6 @@
 import { render } from "@testing-library/vue";
-import FormattedWindSpeed from "./FormattedWindSpeed";
+import FormattedWindSpeed from "./FormattedWindSpeed.vue";
 import store from "../../infrastructure/store";
-
-jest.mock("../../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-        MODE: "prod",
-    };
-});
 
 const mocks = {
     $n: () => "9.8",

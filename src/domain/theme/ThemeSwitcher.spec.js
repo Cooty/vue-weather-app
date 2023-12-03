@@ -2,13 +2,6 @@ import { render, fireEvent } from "@testing-library/vue";
 import ThemeSwitcher from "./ThemeSwitcher.vue";
 import store from "../../infrastructure/store";
 
-jest.mock("../../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-        MODE: "dev",
-    };
-});
-
 const switchThemeEn = "switch theme";
 
 const dummyTranslations = {

@@ -3,13 +3,6 @@ import { render } from "@testing-library/vue";
 import AppHeader from "./AppHeader";
 import Vue from "vue";
 
-jest.mock("../infrastructure/environment", () => {
-    return {
-        API_KEY: "1234abc",
-        MODE: "prod",
-    };
-});
-
 describe("A component for rendering the header of the app", () => {
     it("renders the content passed to both left and right slots", () => {
         const dummyContentRight =

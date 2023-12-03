@@ -7,12 +7,6 @@ import {
 import WeatherData from "./model/WeatherData";
 import Coords from "./model/Coords";
 
-jest.mock("./environment", () => {
-    return {
-        MODE: "prod",
-    };
-});
-
 const mockWeatherData = new WeatherData(
     20,
     "stuff",
