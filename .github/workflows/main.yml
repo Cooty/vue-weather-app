@@ -22,7 +22,7 @@ jobs:
               run: |
                   echo "${{secrets.ENV}}" > .env
                   export BASE_URL="${{secrets.BASE_URL}}"
-                  npm ci --no-fund --no-optional
+                  npm ci --no-fund --omit=optional
                   npm run lint
                   npm run build
               # npm run test
